@@ -1,0 +1,167 @@
+name: Deploy reviewed fork Pages payload
+
+# Fork-only publication of an immutable, already prepared static payload.
+# This does not build QEMU, run payload code, or perform browser acceptance.
+on:
+  workflow_dispatch:
+    inputs:
+      payload_ref:
+        description: "Exact 40-character lowercase commit SHA of the reviewed payload"
+        type: string
+        required: true
+      manifest_sha256:
+        description: "Exact 64-character lowercase SHA256 of public-site-manifest.json"
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-simulator-pages-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: ${{ github.repository == 'yuyun2000/m5stack-esp-emulator' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Require immutable payload and manifest identities
+        env:
+          PAYLOAD_REF: ${{ inputs.payload_ref }}
+          MANIFEST_SHA256: ${{ inputs.manifest_sha256 }}
+        run: |
+          python3 - <<'PY'
+          import os
+          import re
+
+          for name, length in (("PAYLOAD_REF", 40), ("MANIFEST_SHA256", 64)):
+              if not re.fullmatch(r"[0-9a-f]{" + str(length) + r"}", os.environ[name]):
+                  raise SystemExit(f"{name} must be exactly {length} lowercase hexadecimal characters")
+          PY
+      - name: Fetch only the fixed same-repository payload
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+          ref: ${{ inputs.payload_ref }}
+          path: payload
+          fetch-depth: 1
+          persist-credentials: false
+          submodules: false
+          lfs: false
+      - name: Verify static payload bytes and publication metadata
+        env:
+          MANIFEST_SHA256: ${{ inputs.manifest_sha256 }}
+          PAYLOAD_REF: ${{ inputs.payload_ref }}
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path, PurePosixPath
+          import re
+          import stat
+
+          def require(condition, message):
+              if not condition:
+                  raise SystemExit(message)
+
+          def unique_object(pairs):
+              result = {}
+              for key, value in pairs:
+                  require(key not in result, f"Duplicate JSON key: {key}")
+                  result[key] = value
+              return result
+
+          def digest(path):
+              sha = hashlib.sha256()
+              with path.open("rb") as source:
+                  for block in iter(lambda: source.read(1024 * 1024), b""):
+                      sha.update(block)
+              return sha.hexdigest()
+
+          root = Path("payload")
+          site = root / "site"
+          receipt_path = root / "deployment-source.json"
+          require(site.is_dir() and not site.is_symlink(), "site/ must be a real directory")
+          require(receipt_path.is_file() and not receipt_path.is_symlink(), "Missing regular deployment-source.json")
+          manifest_path = site / "public-site-manifest.json"
+          require(manifest_path.is_file() and not manifest_path.is_symlink(), "Missing regular site manifest")
+          expected_manifest = os.environ["MANIFEST_SHA256"]
+          require(digest(manifest_path) == expected_manifest, "Manifest SHA256 mismatch")
+          manifest = json.loads(manifest_path.read_text(encoding="utf-8"), object_pairs_hook=unique_object)
+          receipt = json.loads(receipt_path.read_text(encoding="utf-8"), object_pairs_hook=unique_object)
+          require(manifest.get("kind") == "m5stack-public-site", "Unexpected manifest kind")
+          require(manifest.get("schema_version") == 1, "Unsupported manifest schema")
+          require(manifest.get("publication_eligible") is True, "Payload is not publication eligible")
+          require(manifest.get("candidate_profiles") == [], "Candidate profiles cannot be published")
+          require(manifest.get("firmware_bundled") is False, "Firmware must not be bundled")
+          require(manifest.get("service_url") == "", "Fork preview must not use a Device Service")
+          require(manifest.get("base_path") == "/m5stack-esp-emulator/", "Incorrect production prefix")
+          require(manifest.get("entry") == "index.html", "Unexpected site entry")
+          require(receipt.get("kind") == "reviewed-fork-pages-payload", "Unexpected receipt kind")
+          require(receipt.get("source_repository") == "https://github.com/yuyun2000/m5stack-esp-emulator", "Receipt repository mismatch")
+          require(re.fullmatch(r"[0-9a-f]{40}", receipt.get("source_commit", "")) is not None, "Invalid receipt source commit")
+          require(receipt.get("manifest_sha256") == expected_manifest, "Receipt manifest mismatch")
+          require(receipt.get("base_path") == manifest["base_path"], "Receipt prefix mismatch")
+          require(receipt.get("firmware_or_rom_bundled") is False, "Receipt must exclude firmware and ROM")
+
+          assets = manifest.get("assets")
+          require(isinstance(assets, list) and len(assets) == 2111, "Expected exactly 2111 reviewed assets")
+          require(receipt.get("assets") == len(assets), "Receipt asset count mismatch")
+          indexed = set()
+          for asset in assets:
+              require(isinstance(asset, dict), "Invalid asset record")
+              name = asset.get("path")
+              require(isinstance(name, str) and name and "\\" not in name and not any(ord(c) < 32 for c in name), "Unsafe asset path")
+              relative = PurePosixPath(name)
+              require(not relative.is_absolute() and relative.as_posix() == name and all(part not in (".", "..") for part in relative.parts), f"Unsafe asset path: {name}")
+              require(name != "public-site-manifest.json" and name not in indexed, f"Duplicate or reserved asset: {name}")
+              indexed.add(name)
+              path = site.joinpath(*relative.parts)
+              require(not any(part.is_symlink() for part in (path, *path.parents)), f"Symlink in asset path: {name}")
+              require(path.is_file() and stat.S_ISREG(path.stat().st_mode), f"Missing regular asset: {name}")
+              require(type(asset.get("bytes")) is int and asset["bytes"] >= 0, f"Invalid byte count: {name}")
+              require(path.stat().st_size == asset["bytes"], f"Asset size mismatch: {name}")
+              expected = asset.get("sha256")
+              require(isinstance(expected, str) and re.fullmatch(r"[0-9a-f]{64}", expected) is not None, f"Invalid asset SHA256: {name}")
+              require(digest(path) == expected, f"Asset SHA256 mismatch: {name}")
+
+          actual = set()
+          for path in site.rglob("*"):
+              require(not path.is_symlink(), f"Symlink in site: {path.relative_to(site)}")
+              mode = path.stat().st_mode
+              require(stat.S_ISREG(mode) or stat.S_ISDIR(mode), f"Unsupported file type: {path.relative_to(site)}")
+              if path.is_file():
+                  actual.add(path.relative_to(site).as_posix())
+          require(actual == indexed | {"public-site-manifest.json"}, "Unlisted or missing site files")
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
+              summary.write(f"Verified 2111 static assets from payload `{os.environ['PAYLOAD_REF']}`.\n\n")
+              summary.write(f"Manifest SHA256: `{expected_manifest}`.\n\n")
+              summary.write("This publication performs byte-integrity checks only; browser acceptance is not run.\n")
+          print("Verified manifest, 2111 asset hashes, safe paths and fork publication metadata")
+          PY
+      - name: Upload verified Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages
+          path: payload/site
+
+  deploy:
+    if: ${{ github.repository == 'yuyun2000/m5stack-esp-emulator' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' }}
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy verified fork preview
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages
