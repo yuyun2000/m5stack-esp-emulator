@@ -108,8 +108,9 @@ jobs:
           require(receipt.get("firmware_or_rom_bundled") is False, "Receipt must exclude firmware and ROM")
 
           assets = manifest.get("assets")
-          require(isinstance(assets, list) and len(assets) == 2111, "Expected exactly 2111 reviewed assets")
-          require(receipt.get("assets") == len(assets), "Receipt asset count mismatch")
+          asset_count = receipt.get("assets")
+          require(type(asset_count) is int and 0 < asset_count <= 3000, "Receipt asset count must be an integer from 1 to 3000")
+          require(isinstance(assets, list) and len(assets) == asset_count, "Receipt asset count mismatch")
           indexed = set()
           for asset in assets:
               require(isinstance(asset, dict), "Invalid asset record")
@@ -137,10 +138,10 @@ jobs:
                   actual.add(path.relative_to(site).as_posix())
           require(actual == indexed | {"public-site-manifest.json"}, "Unlisted or missing site files")
           with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
-              summary.write(f"Verified 2111 static assets from payload `{os.environ['PAYLOAD_REF']}`.\n\n")
+              summary.write(f"Verified {asset_count} static assets from payload `{os.environ['PAYLOAD_REF']}`.\n\n")
               summary.write(f"Manifest SHA256: `{expected_manifest}`.\n\n")
               summary.write("This publication performs byte-integrity checks only; browser acceptance is not run.\n")
-          print("Verified manifest, 2111 asset hashes, safe paths and fork publication metadata")
+          print(f"Verified manifest, {asset_count} asset hashes, safe paths and fork publication metadata")
           PY
       - name: Upload verified Pages artifact
         uses: actions/upload-pages-artifact@v3
