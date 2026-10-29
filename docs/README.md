@@ -263,6 +263,8 @@ SDK 候选见[LVGL 正常时钟证据](evidence/2026-10-29-browser-lvgl-wallcloc
 
 ### 状态、计划与维护
 
+- [测试 fork Pages 发布计划](plans/2026-10-29-fork-pages-expanded-hosts.md)：固定已验证 payload 发布；本轮按用户要求不重复浏览器验收。
+
 
 - [UIFlow2 全接口双主机验证](plans/2026-10-27-uiflow2-complete-api-sweep.md)
 - [Unit 外设与视觉模型集成计划](plans/2026-10-25-unit-runtime-integration.md)

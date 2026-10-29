@@ -1591,3 +1591,14 @@ quiescence 和 physical hardware 仍为 `NOT RUN`；`FW-01` 继续保留完整�
 法律审批和 guest filesystem 权限范围。见
 [证据](evidence/2026-10-29-runtime-acl/README.md)和
 [机器摘要](../tests/firmware/evidence-2026-10-29-runtime-acl.json)。
+
+
+### 2026-10-29 / 测试 fork 15 设备 Pages 发布
+
+用户要求先部署、不重复验收；已取消完整构建/验收任务，直接发布上一轮已验证
+运行时的生产前缀导出。页面源码 `07707a91…`、payload `a23fe38b…`，
+[发布任务](https://github.com/yuyun2000/m5stack-esp-emulator/actions/runs/40851943722)
+于 `2026-10-29T09:45:03Z` 成功；首页与 manifest HTTP 200，公开 manifest
+`995f950e…` 与固定 payload 相同。本次浏览器功能验收为
+`NOT RUN_BY_USER_REQUEST`，原仓库部署与物理硬件为 `NOT RUN`；
+源码/运行时完整 SHA 和边界见 [部署说明](pages-deployment.md)。

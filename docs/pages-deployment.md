@@ -231,3 +231,16 @@ StopWatch、Cardputer-ADV、StamPLC、StackChan、PaperColor、PaperMono。
 [剩余 Xtensa 准入证据](evidence/2026-10-29-wasm-remaining-xtensa/README.md)。
 本轮新版本尚未部署；管理员合并后按上述手动 workflow 重建与发布，正式 HTTPS
 需单独复验。旧正式站点记录不升级为这批新板型的部署结果。
+
+### 2026-10-29 测试 fork 更新
+
+[测试站点](https://yuyun2000.github.io/m5stack-esp-emulator/) 已由
+[fork-only 发布任务](https://github.com/yuyun2000/m5stack-esp-emulator/actions/runs/40851943722)
+更新为 15 款浏览器设备。页面源码为 `07707a91da952d7b0d7dfbf10164056f7ed60b5c`，
+静态 payload 为 `a23fe38bcceb13c3ffaa93e639f29f4cf7b85092`；生产前缀
+`/m5stack-esp-emulator/` 的公开 manifest SHA256 为
+`995f950ecafaf030d41f4b25b737a4b5e7de22c909313b4da0d7c11c31beafe8`。
+复用上一轮已验证 WASM `ab1691d6…`，完整保留对应源码和许可，不打包 ROM/固件。
+按用户要求不重复构建或浏览器功能验收；本次只确认 Pages 发布成功、首页与
+manifest HTTP 200 及静态版本身份。效果由用户检查，不授予新一轮公开 guest PASS。
+此 fork-only 手动工作流不修改原 `public-site.yml` 或原仓库发布门禁。
