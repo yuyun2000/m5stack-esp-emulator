@@ -1,0 +1,99 @@
+{
+  "id": "stackchan",
+  "name": "StackChan",
+  "sku": "K151 / K151-R",
+  "group": "esp32-s3",
+  "category": "robot",
+  "hardware": {
+    "soc": "ESP32-S3",
+    "architecture": "xtensa-lx7",
+    "flash_bytes": 16777216,
+    "psram_bytes": 8388608,
+    "display": {
+      "type": "ips",
+      "width": 320,
+      "height": 240,
+      "shape": "rect",
+      "driver": "ILI9342C / ILI9342E",
+      "touch": true,
+      "touch_driver": "FT6336U",
+      "diagonal_in": 2.0
+    },
+    "controls": [
+      {
+        "id": "touch",
+        "type": "touch",
+        "label": "Touch"
+      },
+      {
+        "id": "servo_yaw",
+        "type": "servo",
+        "label": "Yaw"
+      },
+      {
+        "id": "servo_pitch",
+        "type": "servo",
+        "label": "Pitch"
+      }
+    ],
+    "sensors": [
+      "camera:gc0308",
+      "imu:bmi270",
+      "magnetometer:bmm150",
+      "rtc:bm8563",
+      "light-proximity:ltr553",
+      "battery:axp2101",
+      "io-expander:aw9523",
+      "io-expander:m5ioe1",
+      "power-monitor:ina226",
+      "audio:es7210",
+      "speaker:aw88298",
+      "touch:si12t",
+      "nfc:st25r3916",
+      "ir",
+      "rgb-led",
+      "servo:yaw-feedback",
+      "servo:pitch-feedback"
+    ],
+    "dimensions_mm": [
+      54.0,
+      70.5,
+      61.5
+    ],
+    "weight_g": 187.2
+  },
+  "shell": {
+    "preset": "robot",
+    "accent": "#8bd3ff",
+    "screen_scale": 0.9,
+    "body_theme": "white",
+    "reference_image": "/m5stack-esp-emulator/platform/web/assets/reference-cutout/stackchan.png",
+    "cutout": true
+  },
+  "runtime": {
+    "backend": "qemu-esp32s3",
+    "chip": "esp32s3",
+    "status": "reference-ready",
+    "peripheral_status": "simulated",
+    "display_protocol": "spi-ili9342",
+    "execution": "native-qemu",
+    "blockers": [],
+    "validation": {
+      "date": "2026-10-23",
+      "status": "display-input-peripherals-wifi-ble-pass",
+      "detail": "官方 UIFlow2 v2.5.3 在同一 QEMU guest 内通过显示/触摸、相机、IMU/磁力计、电源与 IO 扩展、INA226、LTR553、RTC、双舵机、音频、NFC、IR、WiFi DHCP/HTTP 以及 UART2 HCI BLE；StackChan 8/8 外设矩阵通过。"
+    }
+  },
+  "uiflow2": {
+    "supported": true,
+    "m5ui": true,
+    "firmware": {
+      "version": "v2.5.3",
+      "firmware_id": "1897200000000002716",
+      "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002716/2098280583558025217/bin/2098280583558025218.bin"
+    }
+  },
+  "group_label": "ESP32-S3",
+  "path": "devices/esp32-s3/stackchan",
+  "status_label": "reference-ready：真实固件、画面和输入已打通"
+}

@@ -1,0 +1,64 @@
+{
+  "id": "nanoc6",
+  "name": "NanoC6",
+  "sku": "C122",
+  "group": "esp32-c6",
+  "category": "nano",
+  "hardware": {
+    "soc": "ESP32-C6FH4",
+    "architecture": "riscv32",
+    "flash_bytes": 4194304,
+    "psram_bytes": null,
+    "display": null,
+    "controls": [
+      {
+        "id": "button",
+        "type": "button",
+        "label": "GPIO9",
+        "gpio": 9
+      }
+    ],
+    "sensors": [
+      "rgb-led",
+      "led-output:blue",
+      "ir"
+    ],
+    "dimensions_mm": [
+      23.5,
+      12.0,
+      9.5
+    ],
+    "weight_g": 2.7
+  },
+  "shell": {
+    "preset": "console-only",
+    "accent": "#7ce38b",
+    "body_theme": "cyan",
+    "reference_image": "/m5stack-esp-emulator/platform/web/assets/reference-cutout/nanoc6.png",
+    "cutout": true
+  },
+  "runtime": {
+    "backend": "qemu-esp32c6",
+    "chip": "esp32c6",
+    "status": "headless-ready",
+    "display_protocol": "none",
+    "execution": "native-qemu",
+    "validation": {
+      "date": "2026-10-24",
+      "status": "board-peripherals-wifi-ble-pass",
+      "detail": "官方 UIFlow2 v2.5.3 在同一 QEMU C6 guest 内通过 hardware.RGB/WS2812、GPIO9 按键、GPIO7 蓝色 LED、RMT NEC 红外、QEMU ESP32-C6 WiFi 扫描/关联/DHCP/HTTP 和 UART1 HCI BLE NUS；独立 runner、公网探针和 Device Service 单个 qemu-unified lease 均通过。跨厂商公开固件审查另记录 Zigbee/802.15.4 controller 未建模（RUNTIME-02）；这不否定已通过的基线外设/WiFi/BLE 路径。"
+    }
+  },
+  "uiflow2": {
+    "supported": true,
+    "m5ui": false,
+    "firmware": {
+      "version": "v2.5.3",
+      "firmware_id": "1897200000000001159",
+      "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001159/2098280414426910722/bin/2098280414426910723.bin"
+    }
+  },
+  "group_label": "ESP32-C6",
+  "path": "devices/esp32-c6/nanoc6",
+  "status_label": "headless-ready：真实固件、板级外设和串口/数据面已打通（无显示/画面契约）"
+}

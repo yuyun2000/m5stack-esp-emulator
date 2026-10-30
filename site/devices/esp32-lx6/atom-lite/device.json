@@ -1,0 +1,67 @@
+{
+  "id": "atom-lite",
+  "name": "Atom Lite",
+  "sku": "C008",
+  "group": "esp32-lx6",
+  "category": "atom",
+  "hardware": {
+    "soc": "ESP32-PICO-D4",
+    "architecture": "xtensa-lx6",
+    "flash_bytes": 4194304,
+    "psram_bytes": 0,
+    "display": null,
+    "controls": [
+      {
+        "id": "button",
+        "type": "button",
+        "label": "USER",
+        "gpio": 39
+      }
+    ],
+    "sensors": [
+      "rgb-led",
+      "ir"
+    ],
+    "led_matrix": {
+      "width": 1,
+      "height": 1,
+      "count": 1
+    }
+  },
+  "shell": {
+    "preset": "atom",
+    "accent": "#3b82f6",
+    "screen_scale": 1.05,
+    "body_theme": "white"
+  },
+  "runtime": {
+    "backend": "qemu-esp32lx6",
+    "chip": "esp32",
+    "status": "candidate",
+    "peripheral_status": "partial",
+    "display_protocol": null,
+    "execution": "native-qemu",
+    "validation": {
+      "date": "2026-10-29",
+      "status": "native-selected-behaviors-pass",
+      "detail": "固定官方 v2.5.3 在 dc98b0fd 原生运行时已通过独立 guest 启动、两次 USER 按键、GPIO27 RMT RGB 输出和无 LCD 契约共 13 项；IR、浏览器准入及物理行为独立验证。 新 WASM 3d91c7b1 的独立浏览器上传示例已通过相同固件、真实模型输入、控制器输出或帧像素及完整 Worker 清理；默认参考入口另行取证。",
+      "evidence": "docs/evidence/2026-10-29-motion-command-followup/summary.json",
+      "category": "virtual-device"
+    },
+    "blockers": [
+      "IR and other unselected peripheral paths remain unvalidated; browser admission is limited to its hash-pinned RGB/USER fixture."
+    ]
+  },
+  "uiflow2": {
+    "supported": true,
+    "m5ui": false,
+    "firmware": {
+      "version": "v2.5.3",
+      "firmware_id": "1897200000000002571",
+      "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002571/2098279874229915649/bin/2098279874229915650.bin"
+    }
+  },
+  "group_label": "ESP32 LX6",
+  "path": "devices/esp32-lx6/atom-lite",
+  "status_label": "candidate"
+}

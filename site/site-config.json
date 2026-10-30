@@ -1,0 +1,11 @@
+{
+  "browser_board_execution": true,
+  "browser_candidate_profiles": [],
+  "browser_runtime_build": "source-build",
+  "browser_runtime_engine": "qemu-wasm",
+  "browser_wallclock_example": true,
+  "max_firmware_bytes": 67108864,
+  "publication_eligible": true,
+  "schema_version": 1,
+  "service_url": ""
+}

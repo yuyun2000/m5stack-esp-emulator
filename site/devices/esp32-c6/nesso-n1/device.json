@@ -1,0 +1,83 @@
+{
+  "id": "nesso-n1",
+  "name": "Arduino Nesso N1",
+  "sku": "DK001",
+  "group": "esp32-c6",
+  "category": "core",
+  "hardware": {
+    "soc": "ESP32-C6",
+    "architecture": "riscv32",
+    "flash_bytes": 16777216,
+    "psram_bytes": null,
+    "display": {
+      "type": "ips",
+      "width": 135,
+      "height": 240,
+      "shape": "rect",
+      "driver": "ST7789",
+      "touch": true,
+      "touch_driver": "FT6336",
+      "diagonal_in": 1.14
+    },
+    "controls": [
+      {
+        "id": "touch",
+        "type": "touch",
+        "label": "Touch"
+      },
+      {
+        "id": "key1",
+        "type": "button",
+        "label": "KEY1"
+      },
+      {
+        "id": "key2",
+        "type": "button",
+        "label": "KEY2"
+      }
+    ],
+    "sensors": [
+      "imu:bmi270",
+      "lora",
+      "buzzer:i2s-gpio",
+      "ir-tx",
+      "battery-fuel-gauge:bq27220",
+      "charger:aw32001",
+      "io-expander:pi4ioe5v6408"
+    ],
+    "dimensions_mm": null,
+    "weight_g": null
+  },
+  "shell": {
+    "preset": "core",
+    "accent": "#00979d",
+    "screen_scale": 0.78,
+    "body_theme": "rugged-black",
+    "reference_image": "/m5stack-esp-emulator/platform/web/assets/reference-cutout/nesso-n1.png",
+    "cutout": true
+  },
+  "runtime": {
+    "backend": "qemu-esp32c6",
+    "chip": "esp32c6",
+    "status": "reference-ready",
+    "display_protocol": "spi-st7789",
+    "execution": "native-qemu",
+    "validation": {
+      "date": "2026-10-24",
+      "status": "display-touch-peripherals-wifi-ble-pass",
+      "detail": "官方 UIFlow2 v2.5.3 在同一 QEMU C6 guest 内通过 135x240 显示、触摸/按键、PI4IOE、BQ27220/AW32001、BMI270、SX1262 LoRa、RMT 红外、I2S 蜂鸣器、QEMU ESP32-C6 WiFi DHCP/HTTP、example.com IPv4 DNS/HTTP 和 UART1 HCI BLE NUS；独立 runner 与 Device Service 单个 qemu-unified lease 均通过，stock hardware.RGB() 仍为 NOT RUN。RUNTIME-01 已定位为 16 MiB Flash legacy 写擦地址宽度和复位 PMP 状态问题并修复：Meshtastic 经 Device Service 重跑不再报 Invalid chip id，但仍存在独立的 Instruction access fault，因此完整功能仍为 PARTIAL。"
+    }
+  },
+  "uiflow2": {
+    "supported": true,
+    "m5ui": false,
+    "firmware": {
+      "version": "v2.5.3",
+      "firmware_id": "1897200000000002638",
+      "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002638/2098281060085485570/bin/2098281060085485571.bin"
+    }
+  },
+  "group_label": "ESP32-C6",
+  "path": "devices/esp32-c6/nesso-n1",
+  "status_label": "reference-ready：真实固件、画面和输入已打通"
+}

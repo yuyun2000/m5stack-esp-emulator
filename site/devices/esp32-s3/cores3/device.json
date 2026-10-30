@@ -1,0 +1,85 @@
+{
+  "id": "cores3",
+  "name": "CoreS3",
+  "sku": "K128",
+  "group": "esp32-s3",
+  "category": "core",
+  "hardware": {
+    "soc": "ESP32-S3",
+    "architecture": "xtensa-lx7",
+    "flash_bytes": 16777216,
+    "psram_bytes": 8388608,
+    "display": {
+      "type": "ips",
+      "width": 320,
+      "height": 240,
+      "shape": "rect",
+      "driver": "ILI9342C / ILI9342E",
+      "touch": true,
+      "diagonal_in": 2.0
+    },
+    "controls": [
+      {
+        "id": "touch",
+        "type": "touch",
+        "label": "Touch"
+      },
+      {
+        "id": "power",
+        "type": "button",
+        "label": "PWR"
+      }
+    ],
+    "sensors": [
+      "camera:gc0308",
+      "imu:bmi270",
+      "magnetometer:bmm150",
+      "rtc:bm8563",
+      "light-proximity:ltr553",
+      "io-expander:aw9523",
+      "usb-host:max3421e",
+      "storage:sd-spi",
+      "microphone",
+      "speaker"
+    ],
+    "dimensions_mm": [
+      54.0,
+      54.0,
+      15.5
+    ],
+    "weight_g": 37.8
+  },
+  "shell": {
+    "preset": "core",
+    "renderer": "cores3-three",
+    "accent": "#35a7ff",
+    "screen_scale": 0.82,
+    "body_theme": "graphite",
+    "reference_image": "/m5stack-esp-emulator/platform/web/assets/reference-cutout/cores3.png",
+    "cutout": true
+  },
+  "runtime": {
+    "backend": "qemu-esp32s3",
+    "chip": "esp32s3",
+    "status": "reference-ready",
+    "display_protocol": "spi-ili9342",
+    "execution": "native-qemu",
+    "validation": {
+      "date": "2026-10-25",
+      "status": "display-touch-peripherals-wifi-ble-pass",
+      "detail": "官方 UIFlow2 v2.5.3 在同一 QEMU guest 内通过 320x240 显示/触摸、电源/RTC/IMU/ALS、AW9523、扬声器、麦克风、GC0308 camera.snapshot()、MAX3421E USB Host、WiFi DHCP/HTTP 和 UART1 HCI BLE，并通过 WPA2-PSK 正确密码与 M2 MIC 错误密码拒绝路径。启动菜单透明/调色板图像仍有独立视觉边界。"
+    }
+  },
+  "uiflow2": {
+    "supported": true,
+    "m5ui": true,
+    "firmware": {
+      "version": "v2.5.3",
+      "firmware_id": "1897200000000001950",
+      "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001950/2102696305989775362/bin/2102696305989775363.bin"
+    }
+  },
+  "group_label": "ESP32-S3",
+  "path": "devices/esp32-s3/cores3",
+  "status_label": "reference-ready：真实固件、画面和输入已打通"
+}

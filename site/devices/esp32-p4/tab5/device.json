@@ -1,0 +1,97 @@
+{
+  "id": "tab5",
+  "name": "Tab5",
+  "sku": "C145 / K145",
+  "group": "esp32-p4",
+  "category": "tablet",
+  "hardware": {
+    "soc": "ESP32-P4NRW32",
+    "wireless_soc": "ESP32-C6-MINI-1U",
+    "architecture": "riscv32",
+    "flash_bytes": 16777216,
+    "psram_bytes": 33554432,
+    "display": {
+      "type": "ips",
+      "width": 1280,
+      "height": 720,
+      "shape": "rect",
+      "driver": "ST7121 / ST7123",
+      "touch": true,
+      "diagonal_in": 5.0
+    },
+    "controls": [
+      {
+        "id": "touch",
+        "type": "touch",
+        "label": "Touch"
+      },
+      {
+        "id": "reset",
+        "type": "button",
+        "label": "Reset/Boot"
+      }
+    ],
+    "sensors": [
+      "wireless:esp32c6-mini",
+      "camera:sc2356",
+      "imu:bmi270",
+      "rtc:rx8130ce",
+      "power-monitor:ina226",
+      "io-expander:pi4ioe5v6408",
+      "audio:es8388",
+      "microphone:es7210",
+      "speaker:es8388",
+      "usb-host:usb-host-p4-dwc",
+      "rs485",
+      "storage:sd",
+      "charger:ip2326"
+    ],
+    "dimensions_mm": [
+      128.0,
+      80.0,
+      12.0
+    ],
+    "weight_g": 120.9
+  },
+  "shell": {
+    "preset": "tab",
+    "accent": "#5a8dee",
+    "screen_scale": 0.32,
+    "body_theme": "black-tablet",
+    "reference_image": "/m5stack-esp-emulator/platform/web/assets/reference-cutout/tab5.png",
+    "cutout": true
+  },
+  "runtime": {
+    "backend": "esp-emulator-native",
+    "chip": "esp32p4",
+    "status": "reference-ready",
+    "peripheral_status": "partial",
+    "display_protocol": "m5gfx-psram-framebuffer",
+    "execution": "esp-emu-native",
+    "blockers": [
+      "SC2356 MIPI CSI-2 controller/frame path is absent from esp-emu 0.50.0",
+      "ES8388/ES7210 I2S register and PCM endpoints are absent from esp-emu 0.50.0",
+      "ESP32-P4 USB Host controller and endpoint attachment are absent",
+      "ST7123 touch is currently a firmware GDB mailbox, not an I2C chip model",
+      "Tab5 SDIO storage is not wired to a host block backend",
+      "Tab5 PI4IOE CHG_STAT/CHG_EN and Power.isCharging() decode pass for charging and discharging, but IP2326 analog current/termination behavior and hot state injection remain partial; BMI270 identity, dynamic sensor values, GPIO side effects and interrupts also remain partial"
+    ],
+    "validation": {
+      "date": "2026-10-22",
+      "status": "display-touch-rs485-pass-peripherals-partial",
+      "detail": "UIFlow2 P4 firmware boots with the C6 ESP-Hosted bridge, renders a physical 1280x720 landscape frame through the real M5GFX drawing path, and redraws after touch. Tab5 I2C reaches G31/G32 through the P4 controller: INA226 preload reaches Power as 8000mV/1248mA/87%, machine.RTC writes and reads RX8130, both PI4IOE IDs/output writeback pass, and CHG_STAT=0x00/0x40 reaches Power.isCharging() as charging/discharging. SIT3088 RS-485 passes through UART1 G20/G21 and direction G34. BMI270 identity, dynamic I2C/time injection, IP2326 analog current/termination behavior and the remaining native P4 data planes remain partial."
+    }
+  },
+  "uiflow2": {
+    "supported": true,
+    "m5ui": true,
+    "firmware": {
+      "version": "v2.5.3",
+      "firmware_id": "1897200000000002379",
+      "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002379/2098280943676772353/bin/2098280943676772354.bin"
+    }
+  },
+  "group_label": "ESP32-P4",
+  "path": "devices/esp32-p4/tab5",
+  "status_label": "reference-ready：真实固件、画面和输入已打通"
+}

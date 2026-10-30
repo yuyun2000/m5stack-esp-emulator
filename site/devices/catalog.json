@@ -1,0 +1,1047 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-26",
+  "groups": [
+    {
+      "id": "esp32-s3",
+      "label": "ESP32-S3",
+      "path": "esp32-s3"
+    },
+    {
+      "id": "esp32-c6",
+      "label": "ESP32-C6",
+      "path": "esp32-c6"
+    },
+    {
+      "id": "esp32-p4",
+      "label": "ESP32-P4",
+      "path": "esp32-p4"
+    },
+    {
+      "id": "esp32-lx6",
+      "label": "ESP32 LX6",
+      "path": "esp32-lx6"
+    },
+    {
+      "id": "linux-arm64",
+      "label": "Linux ARM64",
+      "path": "linux-arm64"
+    }
+  ],
+  "devices": [
+    {
+      "id": "nesso-n1",
+      "name": "Arduino Nesso N1",
+      "sku": "DK001",
+      "group": "esp32-c6",
+      "group_label": "ESP32-C6",
+      "category": "core",
+      "path": "esp32-c6/nesso-n1",
+      "shell": "core",
+      "display": {
+        "type": "ips",
+        "width": 135,
+        "height": 240,
+        "shape": "rect",
+        "driver": "ST7789",
+        "touch": true,
+        "touch_driver": "FT6336",
+        "diagonal_in": 1.14
+      },
+      "runtime": {
+        "backend": "qemu-esp32c6",
+        "chip": "esp32c6",
+        "status": "reference-ready",
+        "display_protocol": "spi-st7789",
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-24",
+          "status": "display-touch-peripherals-wifi-ble-pass",
+          "detail": "官方 UIFlow2 v2.5.3 在同一 QEMU C6 guest 内通过 135x240 显示、触摸/按键、PI4IOE、BQ27220/AW32001、BMI270、SX1262 LoRa、RMT 红外、I2S 蜂鸣器、QEMU ESP32-C6 WiFi DHCP/HTTP、example.com IPv4 DNS/HTTP 和 UART1 HCI BLE NUS；独立 runner 与 Device Service 单个 qemu-unified lease 均通过，stock hardware.RGB() 仍为 NOT RUN。RUNTIME-01 已定位为 16 MiB Flash legacy 写擦地址宽度和复位 PMP 状态问题并修复：Meshtastic 经 Device Service 重跑不再报 Invalid chip id，但仍存在独立的 Instruction access fault，因此完整功能仍为 PARTIAL。"
+        }
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000002638",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002638/2098281060085485570/bin/2098281060085485571.bin"
+        }
+      }
+    },
+    {
+      "id": "nanoc6",
+      "name": "NanoC6",
+      "sku": "C122",
+      "group": "esp32-c6",
+      "group_label": "ESP32-C6",
+      "category": "nano",
+      "path": "esp32-c6/nanoc6",
+      "shell": "console-only",
+      "display": null,
+      "runtime": {
+        "backend": "qemu-esp32c6",
+        "chip": "esp32c6",
+        "status": "headless-ready",
+        "display_protocol": "none",
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-24",
+          "status": "board-peripherals-wifi-ble-pass",
+          "detail": "官方 UIFlow2 v2.5.3 在同一 QEMU C6 guest 内通过 hardware.RGB/WS2812、GPIO9 按键、GPIO7 蓝色 LED、RMT NEC 红外、QEMU ESP32-C6 WiFi 扫描/关联/DHCP/HTTP 和 UART1 HCI BLE NUS；独立 runner、公网探针和 Device Service 单个 qemu-unified lease 均通过。跨厂商公开固件审查另记录 Zigbee/802.15.4 controller 未建模（RUNTIME-02）；这不否定已通过的基线外设/WiFi/BLE 路径。"
+        }
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000001159",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001159/2098280414426910722/bin/2098280414426910723.bin"
+        }
+      }
+    },
+    {
+      "id": "atom-lite",
+      "name": "Atom Lite",
+      "sku": "C008",
+      "group": "esp32-lx6",
+      "group_label": "ESP32 LX6",
+      "category": "atom",
+      "path": "esp32-lx6/atom-lite",
+      "shell": "atom",
+      "display": null,
+      "runtime": {
+        "backend": "qemu-esp32lx6",
+        "chip": "esp32",
+        "status": "candidate",
+        "peripheral_status": "partial",
+        "display_protocol": null,
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-29",
+          "status": "native-selected-behaviors-pass",
+          "detail": "固定官方 v2.5.3 在 dc98b0fd 原生运行时已通过独立 guest 启动、两次 USER 按键、GPIO27 RMT RGB 输出和无 LCD 契约共 13 项；IR、浏览器准入及物理行为独立验证。 新 WASM 3d91c7b1 的独立浏览器上传示例已通过相同固件、真实模型输入、控制器输出或帧像素及完整 Worker 清理；默认参考入口另行取证。",
+          "evidence": "docs/evidence/2026-10-29-motion-command-followup/summary.json",
+          "category": "virtual-device"
+        },
+        "blockers": [
+          "IR and other unselected peripheral paths remain unvalidated; browser admission is limited to its hash-pinned RGB/USER fixture."
+        ]
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000002571",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002571/2098279874229915649/bin/2098279874229915650.bin"
+        }
+      }
+    },
+    {
+      "id": "atom-matrix",
+      "name": "Atom Matrix",
+      "sku": "C008-B",
+      "group": "esp32-lx6",
+      "group_label": "ESP32 LX6",
+      "category": "atom",
+      "path": "esp32-lx6/atom-matrix",
+      "shell": "atom",
+      "display": null,
+      "runtime": {
+        "backend": "qemu-esp32lx6",
+        "chip": "esp32",
+        "status": "candidate",
+        "peripheral_status": "partial",
+        "display_protocol": null,
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-29",
+          "status": "native-rgb-button-pass-imu-axis-partial",
+          "detail": "固定官方 v2.5.3 在 dc98b0fd 已独立通过启动、25 灯同色 RMT 输出、两次 USER 按键和无 LCD 契约；六轴控制器注入可读回，但原 Imu API 的 X/Z 方向未满足板级轴向检查，不升级为完整 IMU 通过。 新 WASM 3d91c7b1 的独立浏览器上传示例已通过相同固件、真实模型输入、控制器输出或帧像素及完整 Worker 清理；默认参考入口另行取证。",
+          "evidence": "docs/evidence/2026-10-29-motion-command-followup/summary.json",
+          "category": "virtual-device"
+        },
+        "blockers": [
+          "Original guest IMU board-axis X/Z conversion does not match the board-axis test oracle. Nonuniform LED spatial order, IR, arbitrary browser firmware and physical hardware remain independent unfinished validation."
+        ]
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "2099000000000000002",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/2099000000000000002/2098279897621549057/bin/2098279897621549058.bin"
+        }
+      }
+    },
+    {
+      "id": "atom-matrix-v11",
+      "name": "Atom Matrix v1.1",
+      "sku": "C008-B-V11",
+      "group": "esp32-lx6",
+      "group_label": "ESP32 LX6",
+      "category": "atom",
+      "path": "esp32-lx6/atom-matrix-v11",
+      "shell": "atom",
+      "display": null,
+      "runtime": {
+        "backend": "qemu-esp32lx6",
+        "chip": "esp32",
+        "status": "candidate",
+        "peripheral_status": "partial",
+        "display_protocol": null,
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-29",
+          "status": "native-rgb-button-pass-imu-axis-partial",
+          "detail": "固定官方 v2.5.3 在 dc98b0fd 已独立通过启动、25 灯同色 RMT 输出、两次 USER 按键和无 LCD 契约；六轴控制器注入可读回，但原 Imu API 的 X/Z 方向未满足板级轴向检查，不升级为完整 IMU 通过。 新 WASM 3d91c7b1 的独立浏览器上传示例已通过相同固件、真实模型输入、控制器输出或帧像素及完整 Worker 清理；默认参考入口另行取证。",
+          "evidence": "docs/evidence/2026-10-29-motion-command-followup/summary.json",
+          "category": "virtual-device"
+        },
+        "blockers": [
+          "Original guest IMU board-axis X/Z conversion does not match the board-axis test oracle. Nonuniform LED spatial order, IR, arbitrary browser firmware and physical hardware remain independent unfinished validation."
+        ]
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "2099000000000000002",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/2099000000000000002/2098279897621549057/bin/2098279897621549058.bin"
+        }
+      }
+    },
+    {
+      "id": "core2",
+      "name": "Core2",
+      "sku": "K010-V11",
+      "group": "esp32-lx6",
+      "group_label": "ESP32 LX6",
+      "category": "core",
+      "path": "esp32-lx6/core2",
+      "shell": "core",
+      "display": {
+        "type": "ips",
+        "width": 320,
+        "height": 240,
+        "shape": "rect",
+        "driver": "ILI9342C / ILI9342E",
+        "touch": true,
+        "touch_driver": "FT6336U",
+        "diagonal_in": 2.0
+      },
+      "runtime": {
+        "backend": "qemu-esp32lx6",
+        "chip": "esp32",
+        "status": "reference-ready",
+        "display_protocol": "spi-ili9342",
+        "execution": "native-qemu",
+        "validation": {
+          "ack_observability": "Patch 0010 preserves opt-in ACK-state observability. In the historical zero-stagger five-instance diagnostic, the first Reset Complete response-to-HLI timestamp delta was 4.506306s of host trace time, not guest virtual time; at the first ACK check ack=NULL and semaphore count 0.",
+          "concurrency_validation": "Two independent two-instance no-stagger 4x120s gates pass 8/8, two independent three-instance 3x120s gates pass 6/6, and two independent four-instance 4x120s gates pass 8/8. Patch 0008 preallocates real guest HCI-event buffers and ACL mbufs while CPU0 is idle; patch 0009 expands the real reserve to 8 event/4 ACL objects. Every passing historical lease records 36 events/9 ACLs on the fast path, HLI 45/45 and hli-errors=0. Two independent five-instance 5x120s batches pass 10/10 and two zero-stagger six-instance gates pass 12/12. The earlier shift=auto zero-stagger five-instance cold start produced one batch passed 5/5 and an independent confirmation failed 3/5. After calibrating the sustained floor to hold/12, two independent eight-instance 8x120s gates pass 16/16 total at the service per-device cap of 8. Under the current QEMU/runtime, two independent zero-stagger 2x60s controls pass 4/4 using a three-sweep hold/40 floor and bounded HTTP/public recheck retries; PSRAM and recoverable network errors have separate evidence fields. Three independent zero-stagger 9x120s attempts produced 9/9, 9/9 and 8/9. The failure was observed at real concurrency 9 and panicked in ble_hs_hci_process_ack at PC 0x402630cc; the following 0x40092e43 panic occurred during reboot. Nine-instance capacity is rejected, DEFAULT_MAX_PER_DEVICE and runner concurrency remain 8, and concurrency 9 is fail-closed. A current-load zero-stagger eight-instance cold-start rebind remains open because host contention prevented all leases from completing guest BLE initialization. The reconnect contract remains 1-121 with 122 rejected. Sustained throughput and teardown modes beyond active-stop also remain OPEN.",
+          "memory_validation": "The m5core2 machine now exposes a QOM-effective 8 MiB PSRAM device. Normal ESP32 DRAM1 remains a 4 MiB directly mapped heap window; a dedicated ESP-IDF esp_himem probe passed in three independent Device Service leases, mapping two different 32 KiB physical blocks through the same virtual MMU window and verifying both after remap (4,456,448 bytes himem capacity, 262,144-byte reserve). Guest sustained stress remains PASS in three independent 120-second leases (35/35/35 checks, 105 MiB total) and one 600-second lease (179 checks). Physical PSRAM/cache timing remains NOT RUN.",
+          "date": "2026-10-30",
+          "status": "display-input-peripherals-wifi-ble-pass",
+          "detail": "官方 UIFlow2 v2.5.3 在同一 m5core2 guest 内通过 320x240 显示/触摸、AXP2101、INA3221、MPU6886、PCF8563、NS4168 扬声器、SPM1423 麦克风、OpenMAC WiFi DHCP/HTTP、example.com IPv4 DNS/HTTP 和 stock firmware 外部 BLE GATT。规范 Device Service profile `core2-native-hci` 已通过 HCI-4、121 轮重连、active-BLE 长稳、active-stop、bounded TCG 和八实例并发。最终 `tb-size=128` 两小时复测绑定 firmware/ELF/QEMU/工具哈希，RSS 323536→252992 KiB、phys footprint 250880→188416 KiB；两批六实例为 12/12，历史八实例合计 16/16。m5core2 machine 现以 8 MiB PSRAM device 和 DRAM1 32 KiB MMU 页映射运行；三个独立 esp_himem lease、三个 120 秒 guest PSRAM 压力和一次 600 秒联网压力均 PASS。当前工具哈希下两批独立 `2x60s` 为 `4/4 PASS`，每 lease 完成三次 PSRAM sweep、两次 controlled/公网重检、WiFi、GATT、frame/QOM、pcap 和 cleanup。三次九实例尝试为 9/9、9/9、8/9；失败在真实并发 9 时触发 `ble_hs_hci_process_ack` `0x402630cc` panic，因此九实例被拒绝，默认容量保持 8。legacy UIFlow 的 shared I2C、equal-deadline timer、TIMG WDT level、QIO/stateful SSI、统一 handoff timeline、exact-time pause/state sweep、setter trace、WDT liveness 和 WDT-off late-state 对照均已形成可重放证据。0064 修复 pending SPI source 在 interrupt-matrix remap 后不投递的通用缺陷；0095 修复 legacy task-WDT level delivery，同一 public firmware 三次 normal-WDT Device Service 运行均越过原 15.55 秒 stage-1 reset，保持 API Key startup UI 到 guest virtual 300 秒以上。setup/REPL 独立交互、完整 factory application、当前宿主负载下的八实例 cold-start 重绑、物理 cache/PSRAM、持续吞吐、其他 teardown 模式与 Espressif BT baseband/controller bit-exact 执行仍未完成。"
+        }
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": true,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000003470",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000003470/2098280227356758018/bin/2098280227356758019.bin"
+        }
+      }
+    },
+    {
+      "id": "stickc",
+      "name": "StickC",
+      "sku": "K016",
+      "group": "esp32-lx6",
+      "group_label": "ESP32 LX6",
+      "category": "stick",
+      "path": "esp32-lx6/stickc",
+      "shell": "stick",
+      "display": {
+        "type": "ips",
+        "width": 80,
+        "height": 160,
+        "shape": "rect",
+        "driver": "ST7735S",
+        "touch": false,
+        "diagonal_in": 0.96
+      },
+      "runtime": {
+        "backend": "qemu-esp32lx6",
+        "chip": "esp32",
+        "status": "candidate",
+        "peripheral_status": "partial",
+        "display_protocol": "spi-st7735s",
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-29",
+          "status": "native-display-input-imu-pass",
+          "detail": "独立 K016 官方 UIFlow2 同 guest 通过 80x160 ST7735S、GPIO37 原始电平和 BtnA down/up/count、MPU6886 一组六轴值及 64 像素帧变化。B/电源、RTC、音频和其它外设仍需独立验证。",
+          "evidence": "docs/evidence/2026-10-29-expanded-hosts/summary.json",
+          "category": "virtual-device"
+        },
+        "blockers": [
+          "Device-local official-firmware display, GPIO37 BtnA/frame and one MPU6886 vector passed. B/power, RTC, audio, IR/LED and broader peripheral behavior remain open."
+        ]
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000002182",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002182/2098280813573656577/bin/2098280813573656578.bin"
+        }
+      }
+    },
+    {
+      "id": "stickc-plus",
+      "name": "StickC Plus",
+      "sku": "K016-P",
+      "group": "esp32-lx6",
+      "group_label": "ESP32 LX6",
+      "category": "stick",
+      "path": "esp32-lx6/stickc-plus",
+      "shell": "stick",
+      "display": {
+        "type": "ips",
+        "width": 135,
+        "height": 240,
+        "shape": "rect",
+        "driver": "ST7789v2",
+        "touch": false,
+        "diagonal_in": 1.14
+      },
+      "runtime": {
+        "backend": "qemu-esp32lx6",
+        "chip": "esp32",
+        "status": "candidate",
+        "peripheral_status": "partial",
+        "display_protocol": "spi-st7789v2",
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-29",
+          "status": "native-selected-behaviors-pass",
+          "detail": "原 StickC Plus K016-P 官方 v2.5.2、ESP32/4MB 在 dc98b0fd 独立 guest 通过 135x240 显示、两次 GPIO37 按键和两组六轴 MPU6886 原 API/QOM 读回，连同 ZIP/历史/清理共 26 项。其它外设及浏览器准入独立验证。 新 WASM 3d91c7b1 的独立浏览器上传示例已通过相同固件、真实模型输入、控制器输出或帧像素及完整 Worker 清理；默认参考入口另行取证。",
+          "evidence": "docs/evidence/2026-10-29-motion-command-followup/summary.json",
+          "category": "virtual-device"
+        },
+        "blockers": [
+          "Selected original v2.5.2 display, GPIO37 and MPU6886 behavior passed independently. RTC, other buttons, audio, IR, power and arbitrary browser firmware still require their own selected-path evidence; no SE/Plus2 result is inherited."
+        ],
+        "service_admission": {
+          "blocked": false,
+          "reason": "Exact official original StickC Plus v2.5.2 ESP32/4MB and independent native display, GPIO37 and MPU6886 paths verified; remaining peripherals are partial."
+        }
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.2",
+          "firmware_id": "1897200000000003037",
+          "version_id": "2094351510644318209",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000003037/2094351510644318209/bin/2094351510644318210.bin",
+          "sha256": "6e82447cc87695703dc973a3d2bac00e34619bd5d011970df19f548923241cb2",
+          "bytes": 4186112,
+          "source_type": "OFFICIAL",
+          "supported_device_code": "STICKC_PLUS",
+          "metadata_url": "https://burner.m5stack.com/api/v1/firmwares/1897200000000003037/versions",
+          "official_product_url": "https://docs.m5stack.com/en/core/StickC-Plus",
+          "official_uiflow2_url": "https://docs.m5stack.com/en/uiflow2/m5stickcplus/program"
+        }
+      }
+    },
+    {
+      "id": "stickc-plus-se",
+      "name": "StickC Plus SE",
+      "sku": "K016-P-SE",
+      "group": "esp32-lx6",
+      "group_label": "ESP32 LX6",
+      "category": "stick",
+      "path": "esp32-lx6/stickc-plus-se",
+      "shell": "stick",
+      "display": {
+        "type": "ips",
+        "width": 135,
+        "height": 240,
+        "shape": "rect",
+        "driver": "ST7789v2",
+        "touch": false,
+        "diagonal_in": 1.14
+      },
+      "runtime": {
+        "backend": "qemu-esp32lx6",
+        "chip": "esp32",
+        "status": "candidate",
+        "peripheral_status": "partial",
+        "display_protocol": "spi-st7789v2",
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-29",
+          "status": "native-display-input-pass",
+          "detail": "独立 K016-P-SE 官方 UIFlow2 同 guest 通过 135x240 ST7789V2、GPIO37 电平与 BtnA down/up/count、64 像素帧变化。SE 未装 IMU；B/电源、RTC、音频和其它外设仍需独立验证。",
+          "evidence": "docs/evidence/2026-10-29-expanded-hosts/summary.json",
+          "category": "virtual-device"
+        },
+        "blockers": [
+          "Device-local official-firmware display and GPIO37 BtnA/frame passed; this board has no IMU. B/power, RTC, audio, IR/LED and broader peripheral behavior remain open."
+        ]
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000003037",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000003037/2098280835014938626/bin/2098280835014938627.bin"
+        }
+      }
+    },
+    {
+      "id": "stickc-plus2",
+      "name": "StickC Plus2",
+      "sku": "K016-P2",
+      "group": "esp32-lx6",
+      "group_label": "ESP32 LX6",
+      "category": "stick",
+      "path": "esp32-lx6/stickc-plus2",
+      "shell": "stick",
+      "display": {
+        "type": "ips",
+        "width": 135,
+        "height": 240,
+        "shape": "rect",
+        "driver": "ST7789v2",
+        "touch": false,
+        "diagonal_in": 1.14
+      },
+      "runtime": {
+        "backend": "qemu-esp32lx6",
+        "chip": "esp32",
+        "status": "candidate",
+        "peripheral_status": "partial",
+        "display_protocol": "spi-st7789",
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-29",
+          "status": "native-display-buttons-imu-rtc-pass",
+          "detail": "独立 K016-P2 官方 UIFlow2 v2.5.3 同 guest 通过 135x240、GPIO37/39/35 的 A/B/PWR down/up、MPU6886 两组六轴输入、PCF8563 真实 I2C1 日期写读和时钟推进。无 AXP192；该官方构建关闭 LVGL，音频/IR/电源等未覆盖。",
+          "evidence": "docs/evidence/2026-10-29-expanded-hosts/summary.json",
+          "category": "virtual-device"
+        },
+        "blockers": [
+          "Device-local display, A/B/PWR, MPU6886 vectors and RTC real-I2C write/read/tick passed. Audio, IR/LED, battery ADC, power hold/wake and broader peripheral behavior remain open."
+        ]
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000000742",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000000742/2098280860075905026/bin/2098280860075905027.bin"
+        }
+      }
+    },
+    {
+      "id": "tab5",
+      "name": "Tab5",
+      "sku": "C145 / K145",
+      "group": "esp32-p4",
+      "group_label": "ESP32-P4",
+      "category": "tablet",
+      "path": "esp32-p4/tab5",
+      "shell": "tab",
+      "display": {
+        "type": "ips",
+        "width": 1280,
+        "height": 720,
+        "shape": "rect",
+        "driver": "ST7121 / ST7123",
+        "touch": true,
+        "diagonal_in": 5.0
+      },
+      "runtime": {
+        "backend": "esp-emulator-native",
+        "chip": "esp32p4",
+        "status": "reference-ready",
+        "peripheral_status": "partial",
+        "display_protocol": "m5gfx-psram-framebuffer",
+        "execution": "esp-emu-native",
+        "blockers": [
+          "SC2356 MIPI CSI-2 controller/frame path is absent from esp-emu 0.50.0",
+          "ES8388/ES7210 I2S register and PCM endpoints are absent from esp-emu 0.50.0",
+          "ESP32-P4 USB Host controller and endpoint attachment are absent",
+          "ST7123 touch is currently a firmware GDB mailbox, not an I2C chip model",
+          "Tab5 SDIO storage is not wired to a host block backend",
+          "Tab5 PI4IOE CHG_STAT/CHG_EN and Power.isCharging() decode pass for charging and discharging, but IP2326 analog current/termination behavior and hot state injection remain partial; BMI270 identity, dynamic sensor values, GPIO side effects and interrupts also remain partial"
+        ],
+        "validation": {
+          "date": "2026-10-22",
+          "status": "display-touch-rs485-pass-peripherals-partial",
+          "detail": "UIFlow2 P4 firmware boots with the C6 ESP-Hosted bridge, renders a physical 1280x720 landscape frame through the real M5GFX drawing path, and redraws after touch. Tab5 I2C reaches G31/G32 through the P4 controller: INA226 preload reaches Power as 8000mV/1248mA/87%, machine.RTC writes and reads RX8130, both PI4IOE IDs/output writeback pass, and CHG_STAT=0x00/0x40 reaches Power.isCharging() as charging/discharging. SIT3088 RS-485 passes through UART1 G20/G21 and direction G34. BMI270 identity, dynamic I2C/time injection, IP2326 analog current/termination behavior and the remaining native P4 data planes remain partial."
+        }
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": true,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000002379",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002379/2098280943676772353/bin/2098280943676772354.bin"
+        }
+      }
+    },
+    {
+      "id": "atoms3",
+      "name": "AtomS3",
+      "sku": "C123",
+      "group": "esp32-s3",
+      "group_label": "ESP32-S3",
+      "category": "atom",
+      "path": "esp32-s3/atoms3",
+      "shell": "atom",
+      "display": {
+        "type": "ips",
+        "width": 128,
+        "height": 128,
+        "shape": "rect",
+        "driver": "GC9107",
+        "touch": false,
+        "diagonal_in": 0.85
+      },
+      "runtime": {
+        "backend": "qemu-esp32s3",
+        "chip": "esp32s3",
+        "status": "candidate",
+        "peripheral_status": "partial",
+        "display_protocol": "spi-gc9107",
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-29",
+          "status": "native-display-input-imu-rgb-pass",
+          "detail": "原版 C123 官方 UIFlow2 v2.5.3 同 guest 通过 128x128 GC9107、GPIO41 按键与帧标记、MPU6886 两组加速度/角速度、显式 GPIO35 RGB 的真实 RMT 输出；默认 RGB() 为 None。IR、网络及物理硬件不由此结果覆盖。",
+          "evidence": "docs/evidence/2026-10-29-expanded-hosts/summary.json",
+          "category": "virtual-device"
+        },
+        "blockers": [
+          "Device-local display, GPIO41 BtnA/frame, MPU6886 vectors and explicit GPIO35 RMT output passed. Default RGB binding, IR, broader peripheral behavior and physical equivalence remain open."
+        ]
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000002444",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002444/2098279922749624321/bin/2098279922749624322.bin"
+        }
+      }
+    },
+    {
+      "id": "atoms3-lite",
+      "name": "AtomS3 Lite",
+      "sku": "C124",
+      "group": "esp32-s3",
+      "group_label": "ESP32-S3",
+      "category": "atom",
+      "path": "esp32-s3/atoms3-lite",
+      "shell": "atom",
+      "display": null,
+      "runtime": {
+        "backend": "qemu-esp32s3",
+        "chip": "esp32s3",
+        "status": "candidate",
+        "peripheral_status": "partial",
+        "display_protocol": null,
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-29",
+          "status": "native-button-rmt-rgb-pass",
+          "detail": "C124 官方 UIFlow2 v2.5.3 原 RGB()/BtnA 经 GPIO41 和 GPIO35 RMT 完成双色/释放闭环，无 LCD。固件关闭 UART REPL，测试 boot 通过真实 UART0 dupterm 输出日志；USB CDC、IR、网络和物理光度未验证。",
+          "evidence": "docs/evidence/2026-10-29-expanded-hosts/summary.json",
+          "category": "virtual-device"
+        },
+        "blockers": [
+          "Device-local official-firmware boot, GPIO41 BtnA and original RGB()/GPIO35 RMT loop passed. USB CDC, IR, broader peripheral behavior and physical optics remain open."
+        ]
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "2099000000000000004",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/2099000000000000004/2098279947072393217/bin/2098279947072393218.bin"
+        }
+      }
+    },
+    {
+      "id": "atoms3r",
+      "name": "AtomS3R",
+      "sku": "C126",
+      "group": "esp32-s3",
+      "group_label": "ESP32-S3",
+      "category": "atom",
+      "path": "esp32-s3/atoms3r",
+      "shell": "atom",
+      "display": {
+        "type": "ips",
+        "width": 128,
+        "height": 128,
+        "shape": "rect",
+        "driver": "ST7735 / GC9107",
+        "touch": false,
+        "diagonal_in": 0.85
+      },
+      "runtime": {
+        "backend": "qemu-esp32s3",
+        "chip": "esp32s3",
+        "status": "reference-ready",
+        "display_protocol": "spi-gc9107",
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-25",
+          "status": "display-input-peripherals-wifi-ble-pass",
+          "detail": "官方 UIFlow2 v2.5.3 在同一 QEMU guest 内通过 128x128 显示、GPIO41 按键、BMI270、BMM150、LP5562 RGB、RMT IR、WiFi DHCP/HTTP 和 UART1 HCI BLE，并通过 WPA2-PSK 正确密码与 M2 MIC 错误密码拒绝路径。"
+        }
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000001772",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001772/2098279973173547010/bin/2098279973173547011.bin"
+        }
+      }
+    },
+    {
+      "id": "cardputer-adv",
+      "name": "Cardputer-ADV",
+      "sku": "K132-Adv",
+      "group": "esp32-s3",
+      "group_label": "ESP32-S3",
+      "category": "cardputer",
+      "path": "esp32-s3/cardputer-adv",
+      "shell": "cardputer",
+      "display": {
+        "type": "ips",
+        "width": 240,
+        "height": 135,
+        "shape": "rect",
+        "driver": "ST7789V2",
+        "touch": false,
+        "diagonal_in": 1.14
+      },
+      "runtime": {
+        "backend": "qemu-esp32s3",
+        "chip": "esp32s3",
+        "status": "reference-ready",
+        "display_protocol": "spi-st7789v2",
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-23",
+          "status": "display-keyboard-peripherals-wifi-ble-pass",
+          "detail": "官方 UIFlow2 v2.5.3 在同一 QEMU guest 内通过 240x135 显示、TCA8418 键盘、BMI270、ES8311/NS4150B 音频、麦克风、SPI microSD、ST25R3916 NFC、CC1101、WiFi DHCP/HTTP 和 UART1 HCI BLE。"
+        }
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000000936",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000000936/2098280200634847233/bin/2098280200634847234.bin"
+        }
+      }
+    },
+    {
+      "id": "cores3",
+      "name": "CoreS3",
+      "sku": "K128",
+      "group": "esp32-s3",
+      "group_label": "ESP32-S3",
+      "category": "core",
+      "path": "esp32-s3/cores3",
+      "shell": "core",
+      "display": {
+        "type": "ips",
+        "width": 320,
+        "height": 240,
+        "shape": "rect",
+        "driver": "ILI9342C / ILI9342E",
+        "touch": true,
+        "diagonal_in": 2.0
+      },
+      "runtime": {
+        "backend": "qemu-esp32s3",
+        "chip": "esp32s3",
+        "status": "reference-ready",
+        "display_protocol": "spi-ili9342",
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-25",
+          "status": "display-touch-peripherals-wifi-ble-pass",
+          "detail": "官方 UIFlow2 v2.5.3 在同一 QEMU guest 内通过 320x240 显示/触摸、电源/RTC/IMU/ALS、AW9523、扬声器、麦克风、GC0308 camera.snapshot()、MAX3421E USB Host、WiFi DHCP/HTTP 和 UART1 HCI BLE，并通过 WPA2-PSK 正确密码与 M2 MIC 错误密码拒绝路径。启动菜单透明/调色板图像仍有独立视觉边界。"
+        }
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": true,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000001950",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001950/2102696305989775362/bin/2102696305989775363.bin"
+        }
+      }
+    },
+    {
+      "id": "dial",
+      "name": "Dial",
+      "sku": "K130",
+      "group": "esp32-s3",
+      "group_label": "ESP32-S3",
+      "category": "dial",
+      "path": "esp32-s3/dial",
+      "shell": "watch-round",
+      "display": {
+        "type": "ips",
+        "width": 240,
+        "height": 240,
+        "shape": "round",
+        "driver": "GC9A01",
+        "touch": true,
+        "diagonal_in": 1.28
+      },
+      "runtime": {
+        "backend": "qemu-esp32s3",
+        "chip": "esp32s3",
+        "status": "candidate",
+        "peripheral_status": "partial",
+        "display_protocol": "spi-gc9a01",
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-29",
+          "status": "native-display-input-rtc-pass-rotary-partial",
+          "detail": "独立 Dial K130 官方 UIFlow2 同 guest 已验证显示、触摸、GPIO42 按键和 RTC；原 RotaryIRQ 延迟回调丢中间状态，50ms 慢输入点不作为修复。旋钮、WS1850S、蜂鸣器与更广行为仍开放。",
+          "evidence": "docs/evidence/2026-10-29-expanded-hosts/summary.json",
+          "category": "virtual-device"
+        },
+        "blockers": [
+          "Device-local display, touch, GPIO42 BtnA and RTC passed. Deferred original Python GPIO callbacks can read identical current pin states and lose rotary steps; the 50ms operating point is not a fix. WS1850S, buzzer and broader peripheral behavior remain open."
+        ]
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": true,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000000879",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000000879/2098280307254054914/bin/2098280307254054915.bin"
+        }
+      }
+    },
+    {
+      "id": "papercolor",
+      "name": "PaperColor",
+      "sku": "C151",
+      "group": "esp32-s3",
+      "group_label": "ESP32-S3",
+      "category": "paper",
+      "path": "esp32-s3/papercolor",
+      "shell": "paper",
+      "display": {
+        "type": "e-paper-color",
+        "width": 400,
+        "height": 600,
+        "shape": "rect",
+        "driver": "E Ink Spectra 6",
+        "touch": false,
+        "diagonal_in": 4.0
+      },
+      "runtime": {
+        "backend": "qemu-esp32s3",
+        "chip": "esp32s3",
+        "status": "reference-ready",
+        "display_protocol": "epd-spectra6",
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-23",
+          "status": "display-input-peripherals-wifi-ble-pass",
+          "detail": "官方 UIFlow2 v2.5.3 在同一 QEMU guest 内通过 400x600 六色电子纸、按键、M5PM1、SHT4X、ES8311/ES7210 音频、SPI microSD、RMT RGB/IR、WiFi DHCP/HTTP 和 UART1 HCI BLE。"
+        }
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000002033",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002033/2098280498975690753/bin/2098280498975690754.bin"
+        }
+      }
+    },
+    {
+      "id": "papermono",
+      "name": "PaperMono",
+      "sku": "C153",
+      "group": "esp32-s3",
+      "group_label": "ESP32-S3",
+      "category": "paper",
+      "path": "esp32-s3/papermono",
+      "shell": "paper",
+      "display": {
+        "type": "e-paper-mono",
+        "width": 480,
+        "height": 800,
+        "shape": "rect",
+        "driver": "SSD1677",
+        "touch": true,
+        "touch_driver": "FT6336G",
+        "grayscale": 4,
+        "diagonal_in": 3.97
+      },
+      "runtime": {
+        "backend": "qemu-esp32s3",
+        "chip": "esp32s3",
+        "status": "reference-ready",
+        "display_protocol": "epd-ssd1677",
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-23",
+          "status": "display-touch-peripherals-wifi-ble-pass",
+          "detail": "官方 UIFlow2 v2.5.3 在同一 QEMU guest 内通过 480x800 四阶灰度 UI、BMI270、M5PM1/IP2315、RX8130、触摸/按键、SDMMC、扬声器、NFC、LoRa、RGB、WiFi DHCP/HTTP 和 UART1 HCI BLE。"
+        }
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "2089633464953118721",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/2089633464953118721/2098280529426337794/bin/2098280529426337795.bin"
+        }
+      }
+    },
+    {
+      "id": "stackchan",
+      "name": "StackChan",
+      "sku": "K151 / K151-R",
+      "group": "esp32-s3",
+      "group_label": "ESP32-S3",
+      "category": "robot",
+      "path": "esp32-s3/stackchan",
+      "shell": "robot",
+      "display": {
+        "type": "ips",
+        "width": 320,
+        "height": 240,
+        "shape": "rect",
+        "driver": "ILI9342C / ILI9342E",
+        "touch": true,
+        "touch_driver": "FT6336U",
+        "diagonal_in": 2.0
+      },
+      "runtime": {
+        "backend": "qemu-esp32s3",
+        "chip": "esp32s3",
+        "status": "reference-ready",
+        "peripheral_status": "simulated",
+        "display_protocol": "spi-ili9342",
+        "execution": "native-qemu",
+        "blockers": [],
+        "validation": {
+          "date": "2026-10-23",
+          "status": "display-input-peripherals-wifi-ble-pass",
+          "detail": "官方 UIFlow2 v2.5.3 在同一 QEMU guest 内通过显示/触摸、相机、IMU/磁力计、电源与 IO 扩展、INA226、LTR553、RTC、双舵机、音频、NFC、IR、WiFi DHCP/HTTP 以及 UART2 HCI BLE；StackChan 8/8 外设矩阵通过。"
+        }
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": true,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000002716",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002716/2098280583558025217/bin/2098280583558025218.bin"
+        }
+      }
+    },
+    {
+      "id": "stamplc",
+      "name": "StamPLC",
+      "sku": "K141",
+      "group": "esp32-s3",
+      "group_label": "ESP32-S3",
+      "category": "industrial",
+      "path": "esp32-s3/stamplc",
+      "shell": "industrial",
+      "display": {
+        "type": "ips",
+        "width": 135,
+        "height": 240,
+        "shape": "rect",
+        "driver": "ST7789V2",
+        "touch": false,
+        "diagonal_in": 1.14
+      },
+      "runtime": {
+        "backend": "qemu-esp32s3",
+        "chip": "esp32s3",
+        "status": "reference-ready",
+        "display_protocol": "spi-st7789v2",
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-23",
+          "status": "display-input-peripherals-wifi-ble-pass",
+          "detail": "官方 UIFlow2 v2.5.3 在同一 QEMU guest 内通过 240x135 显示、按键/RGB、继电器/光耦输入、INA226、LM75、RX8130、TWAI CAN、PWR-485、蜂鸣器 PCM、WiFi DHCP/HTTP 以及 UART1 HCI BLE；StamPLC 6/6 外设矩阵通过。"
+        }
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000001222",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001222/2098280653347049473/bin/2098280653347049474.bin"
+        }
+      }
+    },
+    {
+      "id": "sticks3",
+      "name": "StickS3",
+      "sku": "K150",
+      "group": "esp32-s3",
+      "group_label": "ESP32-S3",
+      "category": "stick",
+      "path": "esp32-s3/sticks3",
+      "shell": "stick",
+      "display": {
+        "type": "ips",
+        "width": 135,
+        "height": 240,
+        "shape": "rect",
+        "driver": "ST7789P3",
+        "touch": false,
+        "diagonal_in": 1.14,
+        "effective_mm": [
+          14.864,
+          24.912
+        ]
+      },
+      "runtime": {
+        "backend": "qemu-esp32s3",
+        "chip": "esp32s3",
+        "status": "reference-ready",
+        "display_protocol": "spi-st7789p3",
+        "execution": "native-qemu",
+        "validation": {
+          "date": "2026-10-25",
+          "status": "display-input-peripherals-wifi-ble-pass",
+          "detail": "官方 UIFlow2 v2.5.3 在同一 QEMU S3 guest 内通过 135x240 显示、A/B/P 按键、M5PM1、BMI270、ES8311 音频、IR、QEMU WiFi DHCP/HTTP 和 UART1 HCI BLE；另在相同 guest 完成 example.com IPv4 DNS/HTTP，并通过 WPA2-PSK 正确密码与 M2 MIC 错误密码拒绝路径。"
+        }
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": false,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000001693",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001693/2098280886097367041/bin/2098280886097367042.bin"
+        }
+      }
+    },
+    {
+      "id": "stopwatch",
+      "name": "StopWatch",
+      "sku": "C152",
+      "group": "esp32-s3",
+      "group_label": "ESP32-S3",
+      "category": "wearable",
+      "path": "esp32-s3/stopwatch",
+      "shell": "watch-round",
+      "display": {
+        "type": "amoled",
+        "width": 466,
+        "height": 466,
+        "shape": "circle",
+        "driver": "CO5300",
+        "touch": true,
+        "diagonal_in": 1.75
+      },
+      "runtime": {
+        "backend": "qemu-esp32s3",
+        "chip": "esp32s3",
+        "status": "reference-ready",
+        "display_protocol": "qspi-co5300",
+        "execution": "native-qemu",
+        "page": "/m5stack-esp-emulator/devices/esp32-s3/stopwatch/web/index.html",
+        "validation": {
+          "date": "2026-10-23",
+          "status": "display-touch-peripherals-wifi-ble-pass",
+          "detail": "官方 UIFlow2 v2.5.3 在同一 QEMU guest 内通过 466x466 圆屏、CST820 触摸、BMI270、M5PM1、M5IOE1/AW8737A 音频、RX8130、振动马达、WiFi DHCP/HTTP 和 UART1 HCI BLE。"
+        }
+      },
+      "uiflow2": {
+        "supported": true,
+        "m5ui": true,
+        "firmware": {
+          "version": "v2.5.3",
+          "firmware_id": "1897200000000002172",
+          "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002172/2098280916376047618/bin/2098280916376047619.bin"
+        }
+      }
+    },
+    {
+      "id": "cardputer-zero",
+      "name": "CardputerZero",
+      "sku": "C154",
+      "group": "linux-arm64",
+      "group_label": "Linux ARM64",
+      "category": "cardputer",
+      "path": "linux-arm64/cardputer-zero",
+      "shell": "cardputer",
+      "display": {
+        "type": "lcd",
+        "width": 320,
+        "height": 170,
+        "shape": "rect",
+        "driver": "ST7789v3",
+        "touch": false,
+        "diagonal_in": 1.9
+      },
+      "runtime": {
+        "backend": "external-linux-arm64",
+        "chip": "bcm2837",
+        "status": "backend-required",
+        "peripheral_status": "simulated",
+        "display_protocol": "panel-mipi-dbi-spi",
+        "reason": "Raspberry Pi CM0/Linux, not an Espressif/UIFlow2 firmware target",
+        "blockers": [],
+        "validation": {
+          "date": "2026-10-22",
+          "status": "linux-display-input-i2c-audio-power-usb-camera-pass",
+          "detail": "官方 CardputerZero ARM64 镜像以 512 MiB RAM 启动；ST7789v3 的 DRM/fb1 路径输出 320x170 RGB565 帧，QMP TCA8418 事件经 BCM GPIO27 中断进入 Linux input。TCA8418、M5IOE1、BMI270、BMM150、RX8130、BQ27220 和 ES8389 均绑定到 Linux 驱动；ES8389 I2C ID/状态、ALSA 播放 PCM、麦克风 PCM 逐字节回放和 AW8737A GPIO24 使能通过；IP2315 QOM 电源路径注入使 BQ27220/Linux status 从 Charging 切换为 Discharging；GL852G MTT 兼容路径同时完成 SR9900A Full-Speed 以太网帧回环和 Low-Speed HID 枚举/输入，r8152 创建 eth0；QMP GPIO13 波形经 Linux LIRC 收到 mode2 数据，GPIO12 NEC 发送边沿可抓取；IMX219 寄存器驱动 Unicam CSI1 完成 640x480 RG10 V4L2 实帧与 V4L2 控制项验证；官方 factory_test 的 LVGL 320x170 首帧通过 fb1 验证，54400/54400 个像素非黑、127 种 RGB565 颜色，画面哈希在 UI 启动后发生变化。"
+        }
+      },
+      "uiflow2": {
+        "supported": false,
+        "m5ui": false,
+        "firmware": null
+      }
+    }
+  ]
+}

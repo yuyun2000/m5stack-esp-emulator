@@ -1,0 +1,167 @@
+{
+  "assets": {
+    "boot.py": {
+      "bytes": 214,
+      "path": "fixture/boot.py",
+      "sha256": "8fc4849761e7bdc252c71759006736f1e5dba98ed486bd934031ac4a08647c33"
+    },
+    "composer_license": {
+      "bytes": 1077,
+      "path": "LICENSE.composer",
+      "sha256": "46e054dd27254243fa431abe8b3aa5a28e353e0ee71d5633833723afee83e5cb"
+    },
+    "emscripten_license": {
+      "bytes": 5093,
+      "path": "LICENSE.emscripten",
+      "sha256": "620a78084fc7ca97c0b5dea9abf891f3ffcadfdbf305276f099c9c4e12fc1d86"
+    },
+    "license": {
+      "bytes": 1523,
+      "path": "LICENSE.littlefs",
+      "sha256": "0cb4ff1daf5fdc1359c6a6ee3116092f08fc100c9d58b1b77ab17bfd801f856d"
+    },
+    "main.py": {
+      "bytes": 2301,
+      "path": "fixture/main.py",
+      "sha256": "7672397edc3bff5256015c5d857fa3b4c53cba814bac6a982fb7eeb521cef3cb"
+    },
+    "module": {
+      "bytes": 12513,
+      "path": "littlefs.mjs",
+      "sha256": "9ba8b6475eb8ae81e665b0e6cddc120cd5aa1af3818e102e2e0f3b1d73d9446d"
+    },
+    "musl_license": {
+      "bytes": 6204,
+      "path": "LICENSE.musl",
+      "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af"
+    },
+    "source": {
+      "bytes": 68884,
+      "path": "source.zip",
+      "sha256": "78766b956ee53e22f8fa606215d1baabf3c1d41b57ea8b8c17164a3406c42f46"
+    },
+    "wallclock.boot.py": {
+      "bytes": 214,
+      "path": "fixtures/cores3-lvgl-wallclock/boot.py",
+      "sha256": "8fc4849761e7bdc252c71759006736f1e5dba98ed486bd934031ac4a08647c33"
+    },
+    "wallclock.candidate_lvgl_loop.py": {
+      "bytes": 3055,
+      "path": "fixtures/cores3-lvgl-wallclock/candidate_lvgl_loop.py",
+      "sha256": "0a460dbbd04838811238dd9022044f4b5e85f76629e44f8b7ba8fb057710363e"
+    },
+    "wallclock.main.py": {
+      "bytes": 3491,
+      "path": "fixtures/cores3-lvgl-wallclock/main.py",
+      "sha256": "e793b5ded4dc81510022723b8e10696a93d0cc4122c6cb5e58000a8ce9b84858"
+    },
+    "wasm": {
+      "bytes": 32804,
+      "path": "littlefs.wasm",
+      "sha256": "f19358bc10b65156aadb1f02c874a1ceb0b64e63dfd1deb1b1d097491bfd6377"
+    }
+  },
+  "build": {
+    "emscripten": "3.1.50",
+    "kind": "source-build",
+    "multiversion": true,
+    "optimization": "O2"
+  },
+  "firmware_bundled": false,
+  "fixture": {
+    "base_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001950/2102696305989775362/bin/2102696305989775363.bin",
+    "composed_firmware": {
+      "sha256": "78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f",
+      "size": 16777216
+    },
+    "id": "cores3-wasm-lvgl-pir-v1",
+    "normalized_base": {
+      "sha256": "ddad233fb05925421de7a2aad1b0c18ce0e947d5820b318eaca2b1e82464ac73",
+      "size": 16777216
+    },
+    "raw_base": {
+      "sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+      "size": 16121856
+    },
+    "source_files": {
+      "boot.py": "8fc4849761e7bdc252c71759006736f1e5dba98ed486bd934031ac4a08647c33",
+      "main.py": "7672397edc3bff5256015c5d857fa3b4c53cba814bac6a982fb7eeb521cef3cb"
+    },
+    "source_sha256": "cd8cf040b91a824111aba8eead93ffaec8a1ae2969d1fde1a740fd27f3385f60",
+    "vfs": {
+      "offset": 11141120,
+      "size": 4980736
+    }
+  },
+  "fixtures": {
+    "cores3-wasm-lvgl-wallclock-v1": {
+      "base_file_count": 17,
+      "base_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001950/2102696305989775362/bin/2102696305989775363.bin",
+      "clock_divisor": 1,
+      "composed_firmware": {
+        "sha256": "e9500994f4c0e1708ec35f5a46146225ac330d210a2427e1fc537c33635d9554",
+        "size": 16777216
+      },
+      "derived_file_count": 18,
+      "id": "cores3-wasm-lvgl-wallclock-v1",
+      "normalized_base": {
+        "sha256": "ddad233fb05925421de7a2aad1b0c18ce0e947d5820b318eaca2b1e82464ac73",
+        "size": 16777216
+      },
+      "preserved_file_count": 15,
+      "raw_base": {
+        "sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+        "size": 16121856
+      },
+      "scheduler_candidate": "sdk-python-single-schedule-v1",
+      "source_assets": {
+        "boot.py": "wallclock.boot.py",
+        "candidate_lvgl_loop.py": "wallclock.candidate_lvgl_loop.py",
+        "main.py": "wallclock.main.py"
+      },
+      "source_files": {
+        "boot.py": "8fc4849761e7bdc252c71759006736f1e5dba98ed486bd934031ac4a08647c33",
+        "candidate_lvgl_loop.py": "0a460dbbd04838811238dd9022044f4b5e85f76629e44f8b7ba8fb057710363e",
+        "main.py": "e793b5ded4dc81510022723b8e10696a93d0cc4122c6cb5e58000a8ce9b84858"
+      },
+      "source_sha256": "4d60594952ef5af609084fc519e85b7064349b0782da35836b8c1673cdd73ecf",
+      "vfs": {
+        "offset": 11141120,
+        "size": 4980736
+      }
+    }
+  },
+  "fs_config": {
+    "block_cycles": 100,
+    "block_size": 4096,
+    "cache_size": 128,
+    "disk_version": 0,
+    "lookahead_size": 128,
+    "name_max": 255,
+    "prog_size": 32,
+    "read_size": 128
+  },
+  "kind": "m5stack-browser-littlefs",
+  "partition_mount": {
+    "alignment": 4096,
+    "export": "_m5_lfs_mount_sized",
+    "format": false,
+    "max_bytes": 16777216,
+    "min_bytes": 8192
+  },
+  "rom_bundled": false,
+  "schema_version": 1,
+  "source": {
+    "commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be",
+    "files": {
+      "LICENSE.md": "0cb4ff1daf5fdc1359c6a6ee3116092f08fc100c9d58b1b77ab17bfd801f856d",
+      "lfs.c": "a36d6a095785ddea9571d541d68d3e4ef01d5b255a99d17d3f07fb6ea60ea132",
+      "lfs.h": "b1befd7288d08815accc8f9af744c55686c0b9e3ac0061c32ceee38a1b3eb96d",
+      "lfs_util.c": "f2fbde533670560434bd9f5a547174cc7c5a4670a02c47b4bd85180dced8b2ec",
+      "lfs_util.h": "548d46aa524dc7449e16739286c1a422a52f9de727ff0be0c2ffc5593f5ca981"
+    },
+    "license": "BSD-3-Clause",
+    "repository": "https://github.com/littlefs-project/littlefs",
+    "tag": "v2.11.3"
+  }
+}

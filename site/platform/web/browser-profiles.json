@@ -1,0 +1,365 @@
+{
+  "devices": [
+    {
+      "browser": {
+        "board": "m5stopwatch",
+        "description": "C/QEMU / stopwatch / vm-div1",
+        "limitations": [
+          "Experimental fixed browser display/input reference; no arbitrary firmware or physical-hardware equivalence claim.",
+          "Normal simulation clock is used for the fixed display/input probe; no physical timing or arbitrary firmware claim.",
+          "Networking, BLE, audio, other Units and arbitrary firmware compatibility are unvalidated.",
+          "The SDK logical display is 468x468 while the QEMU panel is 466x466. Stock touch calibration remains offset: physical (233,233) was observed as logical (239,239)."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (stopwatch)",
+          "sha256": "ef5e81b6da17ba04a0356b3bde782e9f0f8f93b217701a4414a52a8d8d8532c0",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002172/2113079049317601281/bin/2113079049317601282.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "stopwatch"
+    },
+    {
+      "browser": {
+        "board": "m5sticks3",
+        "description": "C/QEMU / sticks3 / vm-div1",
+        "limitations": [
+          "Browser acceptance covers the fixed composed display/input probe and the execution profile recorded in its result.",
+          "Normal simulation clock is limited to the fixed display/input probe; physical timing and arbitrary firmware compatibility are unvalidated.",
+          "Networking, BLE, audio, other Units and arbitrary firmware compatibility are unvalidated."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (sticks3)",
+          "sha256": "c45d4514e21d94a6c069185e08f05851c75b4747d354c1423decdefa625e1dd3",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001693/2113078299069861889/bin/2113078299069861890.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "sticks3"
+    },
+    {
+      "browser": {
+        "board": "m5atoms3",
+        "description": "C/QEMU / atoms3 / vm-div1",
+        "limitations": [
+          "Experimental browser profile: original AtomS3 C123, ESP32-S3FN8, 8 MiB flash and no PSRAM; do not substitute AtomS3R hardware or firmware.",
+          "The exact official-base composed display/input probe passed in the matching source-built WASM, including native-to-model pixels, original button driver and clean Worker teardown.",
+          "Native MPU6886, explicit GPIO35 RGB/RMT and other peripherals require their own device-local evidence and do not inherit browser display/input acceptance.",
+          "Networking, BLE, audio, Units, physical timing and arbitrary firmware compatibility are unvalidated."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (atoms3 C123)",
+          "sha256": "fb294c9780cfc3766fd489e164a1a04dddf54cb989adb113d098fe10cbc52075",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002444/2098279922749624321/bin/2098279922749624322.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "atoms3"
+    },
+    {
+      "browser": {
+        "board": "m5atoms3lite",
+        "description": "C/QEMU / atoms3-lite / vm-div1",
+        "limitations": [
+          "Experimental browser profile: original AtomS3 Lite C124, ESP32-S3FN8, 8 MiB flash, no PSRAM and no display.",
+          "Only a fixed read-only QOM path observes GPIO41 pressed state and GPIO35 WS2812 RMT-decoded RGB/frame count in the same browser worker; no synthetic LCD or host LED writes are used.",
+          "The exact official-base RGB/button probe passed in the matching source-built WASM: original RGB()/BtnA, real RMT-decoded colors, model readback and clean Worker teardown.",
+          "Visual LED emission communicates the decoded digital RGB word; optical brightness, electrical timing, IR, networking, BLE, audio, Units and arbitrary firmware compatibility are unvalidated."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (AtomS3 Lite C124)",
+          "sha256": "338baf7f16703b26fff78619d32e593d8ca4f1934bdad63e3c95eef862f3133c",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/2099000000000000004/2098279947072393217/bin/2098279947072393218.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "atoms3-lite"
+    },
+    {
+      "browser": {
+        "board": "m5atoms3r",
+        "description": "C/QEMU / atoms3r / vm-div1",
+        "limitations": [
+          "Browser acceptance covers the fixed composed display/input probe and the execution profile recorded in its result.",
+          "Normal simulation clock is limited to the fixed display/input probe; physical timing and arbitrary firmware compatibility are unvalidated.",
+          "The AtomS3R display model has an observed +2 physical-row offset for the 8x8 probe marker; input/frame acceptance does not establish pixel-coordinate calibration.",
+          "Networking, BLE, audio, other Units and arbitrary firmware compatibility are unvalidated."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (atoms3r)",
+          "sha256": "91c0f97c904271d4c47d240165fbf5589d44aa0d753ca17d685bfdce5bff199a",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001772/2098279973173547010/bin/2098279973173547011.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "atoms3r"
+    },
+    {
+      "browser": {
+        "board": "m5cores3",
+        "description": "C/QEMU / cores3 / vm-div8",
+        "limitations": [
+          "Browser acceptance is scoped to the fixed CoreS3 LVGL/touch/PIR fixture and execution profile recorded in each result.",
+          "The base profile uses virtual time at 1/8 wall-clock speed. Only the exact firmware SHA in firmwareProfiles selects the normal-clock SDK scheduler candidate; other firmware keeps the base profile.",
+          "The normal-clock example and the stock/div8 baseline have separate validation evidence; neither establishes physical timing or arbitrary stock-menu compatibility.",
+          "Networking, BLE, audio, other Units and arbitrary firmware compatibility are unvalidated."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (cores3)",
+          "sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001950/2102696305989775362/bin/2102696305989775363.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "cores3"
+    },
+    {
+      "browser": {
+        "board": "m5cardputeradv",
+        "description": "C/QEMU / cardputer-adv / vm-div1",
+        "limitations": [
+          "Experimental fixed browser display/input reference; no arbitrary firmware or physical-hardware equivalence claim.",
+          "Explicit qcode-to-physical-matrix translation is required; the fixture decodes all received presses and releases through the official KeyboardI2C driver and guest I2C FIFO polling. GPIO IRQ delivery and additional simultaneous Fn/modifier chords require separate validation.",
+          "Networking, BLE, audio, other Units and arbitrary firmware compatibility are unvalidated.",
+          "The TCA8418 interrupt fix covers default INT_CFG=0 FIFO/W1C semantics. INT_CFG=1 50us timing, KEY_IEN gating and other interrupt sources are unvalidated."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (cardputer-adv)",
+          "sha256": "38b308769e35fe3393bde711e67d27403c32166cf62c10951c19d684fdb38631",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000000936/2113079532912463874/bin/2113079532912463875.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "cardputer-adv"
+    },
+    {
+      "browser": {
+        "board": "m5stamplc",
+        "description": "C/QEMU / stamplc / vm-div1",
+        "limitations": [
+          "Experimental fixed browser display/input reference; no arbitrary firmware or physical-hardware equivalence claim.",
+          "Normal simulation clock is used for the fixed display/input probe; no physical timing or arbitrary firmware claim.",
+          "Networking, BLE, audio, other Units and arbitrary firmware compatibility are unvalidated."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (stamplc)",
+          "sha256": "ab684b9d79d5fc5527be9450c18bee46171ae1b93716492be8aeeede50511470",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001222/2098280653347049473/bin/2098280653347049474.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "stamplc"
+    },
+    {
+      "browser": {
+        "board": "m5stackchan",
+        "description": "C/QEMU / stackchan / vm-div1",
+        "limitations": [
+          "Experimental fixed browser display/input reference; no arbitrary firmware or physical-hardware equivalence claim.",
+          "Normal simulation clock is used for the fixed display/input probe; no physical timing or arbitrary firmware claim.",
+          "Networking, BLE, audio, other Units and arbitrary firmware compatibility are unvalidated."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (stackchan)",
+          "sha256": "9e6e8066ee317691556c4758911a0345ed4e62398f461b364bb90a147c6db5f9",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002716/2098280583558025217/bin/2098280583558025218.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "stackchan"
+    },
+    {
+      "browser": {
+        "board": "m5papercolor",
+        "description": "C/QEMU / papercolor / vm-div1",
+        "limitations": [
+          "Experimental fixed browser display/input reference; no arbitrary firmware or physical-hardware equivalence claim.",
+          "Normal VM clock divisor 1; no physical ePaper waveform, refresh latency, optical, power or hardware equivalence claim.",
+          "Low-frequency full-page EPD quality refresh uses original guest driver; other refresh modes and partial-window semantics are unvalidated.",
+          "Networking, BLE, audio, other Units and arbitrary firmware compatibility are unvalidated."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (papercolor)",
+          "sha256": "166dbd7cfccda4ade1b2284774176955776d24a6fb08434b7ef1d8fca5897816",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002033/2098280498975690753/bin/2098280498975690754.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "papercolor"
+    },
+    {
+      "browser": {
+        "board": "m5papermono",
+        "description": "C/QEMU / papermono / vm-div1",
+        "limitations": [
+          "Experimental fixed browser display/input reference; no arbitrary firmware or physical-hardware equivalence claim.",
+          "Normal VM clock divisor 1; no physical ePaper waveform, refresh latency, optical, power or hardware equivalence claim.",
+          "Low-frequency full-page EPD quality refresh uses original guest driver; other refresh modes and partial-window semantics are unvalidated.",
+          "Networking, BLE, audio, other Units and arbitrary firmware compatibility are unvalidated.",
+          "The fixed fixture uses the official read-only M5.Touch.getTouchPointRaw(0) portrait FT point for hit-testing after M5.update; it records original logical getX/getY and does not repair or grant PASS to their stock calibration. Release coordinates explicitly retain the last pressed raw point."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (papermono)",
+          "sha256": "f3da049b65b5a3899d3484594e3bede92a0928e5217fa260925951a777447b05",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/2089633464953118721/2098280529426337794/bin/2098280529426337795.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "papermono"
+    },
+    {
+      "browser": {
+        "board": "m5core2",
+        "description": "C/QEMU / core2 / vm-div1 / tcg-icount shift5",
+        "limitations": [
+          "Browser acceptance covers the fixed Core2-specific console-preserving boot/main display/input probe and the execution profile recorded in its result.",
+          "Deterministic instruction-count timing (TCG single-thread, tb-size=128, icount shift=5) is limited to the fixed display/input probe; wall-clock and physical timing are unvalidated.",
+          "Networking, BLE, audio, other Units and arbitrary firmware compatibility are unvalidated."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (core2)",
+          "sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000003470/2098280227356758018/bin/2098280227356758019.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "core2"
+    },
+    {
+      "browser": {
+        "board": "m5stickcplus2",
+        "description": "C/QEMU / stickc-plus2 / vm-div1 / tcg-icount shift5",
+        "limitations": [
+          "Experimental browser profile: exact original StickC Plus2 image, ESP32-PICO-V3-02, 8 MiB Flash/2 MiB PSRAM and no AXP192. Exact fixed-probe browser input, framebuffer and Worker cleanup are validated; broader firmware behavior is not inherited.",
+          "Deterministic TCG single-thread icount shift=5 is scoped to the fixed display/input probe; no wall-clock, physical memory or arbitrary firmware timing claim.",
+          "Power/wake, battery ADC, microphone, buzzer, IR, networking/BLE and other peripherals require independent device-local evidence."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (StickC Plus2 K016-P2)",
+          "sha256": "712fd8ca7d232ca84b1214610b7b7933bca4f19233258736d0db33147b4342dc",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000000742/2098280860075905026/bin/2098280860075905027.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "stickc-plus2"
+    },
+    {
+      "browser": {
+        "board": "m5stickc",
+        "description": "C/QEMU / stickc / vm-div1 / tcg-icount shift5",
+        "limitations": [
+          "Experimental browser profile: exact StickC K016 image, ESP32-PICO-D4, 4 MiB Flash, no PSRAM, package 5 eFuse and 80x160 display. Exact fixed-probe browser input, framebuffer and Worker cleanup are validated; broader firmware behavior is not inherited.",
+          "Deterministic TCG single-thread icount shift=5 is scoped to the fixed display/BtnA probe; physical timing and arbitrary firmware compatibility are unvalidated.",
+          "This board has an AXP192 and MPU6886. BtnB, PMIC power button, power/battery, audio, IR, networking/BLE, Units and other peripherals require independent browser device-local evidence."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (StickC K016)",
+          "sha256": "2463fc362f6acfacccb678a2c40aeb733e470ca793ec4a100d2e077baa641f03",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002182/2098280813573656577/bin/2098280813573656578.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "stickc"
+    },
+    {
+      "browser": {
+        "board": "m5stickcplus",
+        "description": "C/QEMU / stickc-plus / vm-div1 / tcg-icount shift5",
+        "limitations": [
+          "Experimental fixed-probe browser profile: original StickC Plus K016-P, exact official UIFlow2 v2.5.2, ESP32-PICO-D4, 4 MiB Flash, no PSRAM, package-5 eFuse, 135x240 ST7789v2, AXP192 and MPU6886.",
+          "Exact original K016-P display, original BtnA model input, guest framebuffer readback and Worker teardown are validated for this fixed probe; native, SE and Plus2 evidence is not inherited.",
+          "Deterministic TCG single-thread icount shift=5 is limited to this fixed probe; physical timing, arbitrary firmware, BtnB/PWR, power, RTC, audio, IR, networking/BLE and Units are unvalidated."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.2 (original StickC Plus K016-P)",
+          "sha256": "6e82447cc87695703dc973a3d2bac00e34619bd5d011970df19f548923241cb2",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000003037/2094351510644318209/bin/2094351510644318210.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "stickc-plus"
+    },
+    {
+      "browser": {
+        "board": "m5stickcplusse",
+        "description": "C/QEMU / stickc-plus-se / vm-div1 / tcg-icount shift5",
+        "limitations": [
+          "Experimental browser profile: exact StickC Plus SE K016-P-SE image, ESP32-PICO-D4, 4 MiB Flash, no PSRAM, package 5 eFuse and 135x240 display. Exact fixed-probe browser input, framebuffer and Worker cleanup are validated; broader firmware behavior is not inherited.",
+          "Deterministic TCG single-thread icount shift=5 is scoped to the fixed display/BtnA probe; physical timing and arbitrary firmware compatibility are unvalidated.",
+          "This SE board has an AXP192 and no IMU. BtnB, PMIC power button, power/battery, audio, IR, networking/BLE, Units and other peripherals require independent browser device-local evidence."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (StickC Plus SE K016-P-SE)",
+          "sha256": "0c7055bb8e64afe1d8fa4fd4bdc0961ca0d6366351aca5d6c83eaaf72155ee88",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000003037/2098280835014938626/bin/2098280835014938627.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "stickc-plus-se"
+    },
+    {
+      "browser": {
+        "board": "m5atomlite",
+        "description": "C/QEMU / atom-lite / vm-div1 / tcg-icount shift5",
+        "limitations": [
+          "Experimental fixed-probe browser profile: atom-lite, ESP32-PICO-D4, 4 MiB Flash, no PSRAM, package-5 eFuse and no LCD. Only the exact original RGB()/USER fixture is accepted; the device remains partial.",
+          "Read-only same-worker QOM output observes original RGB() RMT-decoded GPIO27 data and GPIO39 USER input; it supplies no synthetic framebuffer or host LED writes.",
+          "Deterministic TCG single-thread icount shift=5 is limited to this fixed probe; physical timing, optical output, IR, networking/BLE, Units and arbitrary firmware remain unvalidated."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (Atom Lite C008)",
+          "sha256": "8d13d287e18c56a8a27e5bf1617dca81a1c6d847dc302f034f09854753c184d0",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000002571/2098279874229915649/bin/2098279874229915650.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "atom-lite"
+    },
+    {
+      "browser": {
+        "board": "m5atommatrix",
+        "description": "C/QEMU / atom-matrix / vm-div1 / tcg-icount shift5",
+        "limitations": [
+          "Experimental fixed-probe browser profile: atom-matrix, ESP32-PICO-D4, 4 MiB Flash, no PSRAM, package-5 eFuse and no LCD. Only the exact original RGB()/USER fixture is accepted; the device remains partial.",
+          "Read-only same-worker QOM output observes original RGB() RMT-decoded GPIO27 data and GPIO39 USER input; it supplies no synthetic framebuffer or host LED writes.",
+          "Deterministic TCG single-thread icount shift=5 is limited to this fixed probe; physical timing, optical output, IR, networking/BLE, Units and arbitrary firmware remain unvalidated.",
+          "The 25 RMT-decoded colors remain raw digital data. Only uniform frames illuminate all 25 model LEDs; nonuniform frames keep model LEDs unknown until physical chain order is verified.",
+          "IMU axis mapping is not validated by this RGB/button fixture. Neither native automatic board identification nor its backend/SDK root cause is established by the unmatched reference-source oracle."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (Atom Matrix C008-B)",
+          "sha256": "1591382c9b46f10549faa0053b4036aa55f5c8131867b2f039d2650982e7886d",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/2099000000000000002/2098279897621549057/bin/2098279897621549058.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "atom-matrix"
+    },
+    {
+      "browser": {
+        "board": "m5atommatrixv11",
+        "description": "C/QEMU / atom-matrix-v11 / vm-div1 / tcg-icount shift5",
+        "limitations": [
+          "Experimental fixed-probe browser profile: atom-matrix-v11, ESP32-PICO-D4, 4 MiB Flash, no PSRAM, package-5 eFuse and no LCD. Only the exact original RGB()/USER fixture is accepted; the device remains partial.",
+          "Read-only same-worker QOM output observes original RGB() RMT-decoded GPIO27 data and GPIO39 USER input; it supplies no synthetic framebuffer or host LED writes.",
+          "Deterministic TCG single-thread icount shift=5 is limited to this fixed probe; physical timing, optical output, IR, networking/BLE, Units and arbitrary firmware remain unvalidated.",
+          "The 25 RMT-decoded colors remain raw digital data. Only uniform frames illuminate all 25 model LEDs; nonuniform frames keep model LEDs unknown until physical chain order is verified.",
+          "IMU axis mapping is not validated by this RGB/button fixture. Neither native automatic board identification nor its backend/SDK root cause is established by the unmatched reference-source oracle."
+        ],
+        "reference": {
+          "name": "UIFlow2 v2.5.3 (Atom Matrix v1.1 C008-B-V11)",
+          "sha256": "1591382c9b46f10549faa0053b4036aa55f5c8131867b2f039d2650982e7886d",
+          "url": "https://m5burner-cdn.m5stack.com/community/1/2099000000000000002/2098279897621549057/bin/2098279897621549058.bin"
+        },
+        "status": "experimental"
+      },
+      "id": "atom-matrix-v11"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "C/QEMU per-board browser admission; native coverage is not inherited",
+  "source": {
+    "commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "repository": "https://github.com/espressif/qemu.git"
+  }
+}

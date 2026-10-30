@@ -1,0 +1,102 @@
+{
+  "id": "stickc-plus",
+  "name": "StickC Plus",
+  "sku": "K016-P",
+  "group": "esp32-lx6",
+  "category": "stick",
+  "hardware": {
+    "soc": "ESP32-PICO-D4",
+    "architecture": "xtensa-lx6",
+    "flash_bytes": 4194304,
+    "psram_bytes": 0,
+    "display": {
+      "type": "ips",
+      "width": 135,
+      "height": 240,
+      "shape": "rect",
+      "driver": "ST7789v2",
+      "touch": false,
+      "diagonal_in": 1.14
+    },
+    "controls": [
+      {
+        "id": "a",
+        "type": "button",
+        "label": "A",
+        "gpio": 37
+      },
+      {
+        "id": "b",
+        "type": "button",
+        "label": "B",
+        "gpio": 39
+      },
+      {
+        "id": "power",
+        "type": "button",
+        "label": "PWR"
+      }
+    ],
+    "sensors": [
+      "imu:mpu6886",
+      "rtc:bm8563",
+      "microphone:spm1423",
+      "battery:axp192",
+      "charger:axp192",
+      "ir",
+      "led-output:gpio10",
+      "buzzer"
+    ],
+    "power": {
+      "pmic": "AXP192"
+    }
+  },
+  "shell": {
+    "preset": "stick",
+    "accent": "#f58220",
+    "screen_scale": 1.05,
+    "body_theme": "orange"
+  },
+  "runtime": {
+    "backend": "qemu-esp32lx6",
+    "chip": "esp32",
+    "status": "candidate",
+    "peripheral_status": "partial",
+    "display_protocol": "spi-st7789v2",
+    "execution": "native-qemu",
+    "validation": {
+      "date": "2026-10-29",
+      "status": "native-selected-behaviors-pass",
+      "detail": "原 StickC Plus K016-P 官方 v2.5.2、ESP32/4MB 在 dc98b0fd 独立 guest 通过 135x240 显示、两次 GPIO37 按键和两组六轴 MPU6886 原 API/QOM 读回，连同 ZIP/历史/清理共 26 项。其它外设及浏览器准入独立验证。 新 WASM 3d91c7b1 的独立浏览器上传示例已通过相同固件、真实模型输入、控制器输出或帧像素及完整 Worker 清理；默认参考入口另行取证。",
+      "evidence": "docs/evidence/2026-10-29-motion-command-followup/summary.json",
+      "category": "virtual-device"
+    },
+    "blockers": [
+      "Selected original v2.5.2 display, GPIO37 and MPU6886 behavior passed independently. RTC, other buttons, audio, IR, power and arbitrary browser firmware still require their own selected-path evidence; no SE/Plus2 result is inherited."
+    ],
+    "service_admission": {
+      "blocked": false,
+      "reason": "Exact official original StickC Plus v2.5.2 ESP32/4MB and independent native display, GPIO37 and MPU6886 paths verified; remaining peripherals are partial."
+    }
+  },
+  "uiflow2": {
+    "supported": true,
+    "m5ui": false,
+    "firmware": {
+      "version": "v2.5.2",
+      "firmware_id": "1897200000000003037",
+      "version_id": "2094351510644318209",
+      "download_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000003037/2094351510644318209/bin/2094351510644318210.bin",
+      "sha256": "6e82447cc87695703dc973a3d2bac00e34619bd5d011970df19f548923241cb2",
+      "bytes": 4186112,
+      "source_type": "OFFICIAL",
+      "supported_device_code": "STICKC_PLUS",
+      "metadata_url": "https://burner.m5stack.com/api/v1/firmwares/1897200000000003037/versions",
+      "official_product_url": "https://docs.m5stack.com/en/core/StickC-Plus",
+      "official_uiflow2_url": "https://docs.m5stack.com/en/uiflow2/m5stickcplus/program"
+    }
+  },
+  "group_label": "ESP32 LX6",
+  "path": "devices/esp32-lx6/stickc-plus",
+  "status_label": "candidate"
+}

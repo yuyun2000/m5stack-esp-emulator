@@ -1,0 +1,5 @@
+M5Stack browser QEMU source build
+
+QEMU is GPL-2.0; its COPYING and per-file licenses, the complete modified host source, linked dependencies, dependency patches and build recipe are in corresponding-source.tar.xz served beside this executable. This archive is part of the runtime export and must be preserved on redistribution. Individual libraries retain their own licenses (GLib/libgcrypt/libgpg-error LGPL, libffi/pixman/zlib/PCRE2 permissive terms); source archives include their exact license texts. Emscripten linked support/library sources and license texts are also included.
+
+ROM and UIFlow2 firmware are not bundled. Their public availability is not treated as redistribution permission. Obtain the exact required ROM and firmware separately from authoritative upstream or user files; verify SHA-256 in the browser. The reviewed offline CoreS3 vm-div8 fixture does not establish physical timing, other firmware/device coverage or full hardware equivalence.
